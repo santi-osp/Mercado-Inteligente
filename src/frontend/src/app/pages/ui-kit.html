@@ -1,0 +1,696 @@
+<div class="heading">
+  <div>
+    <p class="eyebrow">DESIGN SYSTEM & AUDITORÍA VISUAL</p>
+    <h1>UI Kit & Galería de Componentes</h1>
+    <p class="muted">Documentación viva de tokens, componentes, estados y microinteracciones de Mercado Inteligente.</p>
+  </div>
+</div>
+
+<!-- 1. LOGOS & MARKS -->
+<section class="panel" aria-label="Identidad Visual y Logos">
+  <h2>1. Logos e Identidad Visual</h2>
+  <p class="muted" style="margin-top: 4px; font-size: 13px;">Uso de assets oficiales: logo principal para cabeceras y mark flat para espacios reducidos.</p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px;">
+    <div style="border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 16px; background: var(--mi-surface); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+      <img src="/assets/brand/logo-primary.png" alt="Mercado Inteligente Logo Principal" style="max-height: 44px; width: auto; object-fit: contain;">
+      <span style="font-size: 12px; color: var(--mi-muted); font-family: ui-monospace, monospace;">logo-primary.png</span>
+    </div>
+    <div style="border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 16px; background: var(--mi-surface); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+      <img src="/assets/brand/mark.svg" alt="Mercado Inteligente Isotipo SVG" style="max-height: 44px; width: auto; object-fit: contain;">
+      <span style="font-size: 12px; color: var(--mi-muted); font-family: ui-monospace, monospace;">mark.svg</span>
+    </div>
+    <div style="border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 16px; background: var(--mi-surface); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+      <img src="/assets/brand/mark-flat.svg" alt="Mercado Inteligente Mark Flat" style="max-height: 44px; width: auto; object-fit: contain;">
+      <span style="font-size: 12px; color: var(--mi-muted); font-family: ui-monospace, monospace;">mark-flat.svg</span>
+    </div>
+    <div style="border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 16px; background: var(--mi-text); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+      <img src="/assets/brand/mark-mono.svg" alt="Mercado Inteligente Mark Mono" style="max-height: 44px; width: auto; object-fit: contain; filter: brightness(0) invert(1);">
+      <span style="font-size: 12px; color: #E5E7EB; font-family: ui-monospace, monospace;">mark-mono.svg</span>
+    </div>
+  </div>
+</section>
+
+<!-- 2. TYPOGRAPHY SCALE -->
+<section class="panel" aria-label="Escala Tipográfica">
+  <h2>2. Escala Tipográfica</h2>
+  <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 16px;">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--mi-border); padding-bottom: 8px;">
+      <span style="font-size: 40px; line-height: 44px; font-weight: 700; color: var(--mi-text); letter-spacing: -0.02em;">Display 40/44 Bold</span>
+      <span class="muted" style="font-size: 13px;">40px · 700</span>
+    </div>
+    <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--mi-border); padding-bottom: 8px;">
+      <span style="font-size: 32px; line-height: 38px; font-weight: 700; color: var(--mi-text); letter-spacing: -0.015em;">H1 32/38 Bold</span>
+      <span class="muted" style="font-size: 13px;">32px · 700</span>
+    </div>
+    <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--mi-border); padding-bottom: 8px;">
+      <span style="font-size: 24px; line-height: 30px; font-weight: 700; color: var(--mi-text);">H2 24/30 Bold</span>
+      <span class="muted" style="font-size: 13px;">24px · 700</span>
+    </div>
+    <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--mi-border); padding-bottom: 8px;">
+      <span style="font-size: 18px; line-height: 24px; font-weight: 650; color: var(--mi-text);">H3 18/24 SemiBold</span>
+      <span class="muted" style="font-size: 13px;">18px · 650</span>
+    </div>
+    <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--mi-border); padding-bottom: 8px;">
+      <span style="font-size: 16px; line-height: 24px; font-weight: 500; color: var(--mi-text);">Body Large 16/24 Medium</span>
+      <span class="muted" style="font-size: 13px;">16px · 500</span>
+    </div>
+    <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--mi-border); padding-bottom: 8px;">
+      <span style="font-size: 14px; line-height: 21px; font-weight: 400; color: var(--mi-text);">Body 14/21 Regular</span>
+      <span class="muted" style="font-size: 13px;">14px · 400</span>
+    </div>
+    <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--mi-border); padding-bottom: 8px;">
+      <span style="font-size: 13px; line-height: 18px; font-weight: 500; color: var(--mi-text-secondary);">Small 13/18 Medium</span>
+      <span class="muted" style="font-size: 13px;">13px · 500</span>
+    </div>
+    <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--mi-border); padding-bottom: 8px;">
+      <span style="font-size: 12px; line-height: 16px; font-weight: 500; color: var(--mi-muted); text-transform: uppercase; letter-spacing: 0.05em;">Micro 12/16 Medium Uppercase</span>
+      <span class="muted" style="font-size: 13px;">12px · 500</span>
+    </div>
+    <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--mi-border); padding-bottom: 8px;">
+      <span class="price-value" style="font-size: 22px; line-height: 26px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--mi-text);">$18.900</span>
+      <span class="muted" style="font-size: 13px;">Price 22/26 Tabular Nums</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- 3. COLOR PALETTE TOKENS -->
+<section class="panel" aria-label="Tokens de Color">
+  <h2>3. Paleta Oficial de Tokens</h2>
+  <div class="palette-grid" style="margin-top: 16px;">
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-primary);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-primary</div>
+        <div class="swatch-hex">#167D5A</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-primary-dark);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-primary-dark</div>
+        <div class="swatch-hex">#0E5E43</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-primary-soft); border-bottom: 1px solid var(--mi-border);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-primary-soft</div>
+        <div class="swatch-hex">#EAF5F0</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-background); border-bottom: 1px solid var(--mi-border);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-background</div>
+        <div class="swatch-hex">#F6F7F5</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-surface); border-bottom: 1px solid var(--mi-border);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-surface</div>
+        <div class="swatch-hex">#FFFFFF</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-surface-secondary); border-bottom: 1px solid var(--mi-border);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-surface-sec</div>
+        <div class="swatch-hex">#F0F2EF</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-border);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-border</div>
+        <div class="swatch-hex">#E3E7E4</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-border-strong);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-border-str</div>
+        <div class="swatch-hex">#CCD3CF</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-text);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-text</div>
+        <div class="swatch-hex">#151B18</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-text-secondary);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-text-sec</div>
+        <div class="swatch-hex">#5F6963</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-muted);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-muted</div>
+        <div class="swatch-hex">#87918B</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-promo);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-promo</div>
+        <div class="swatch-hex">#D94C3D</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-warning);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-warning</div>
+        <div class="swatch-hex">#B7791F</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background: var(--mi-info);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">--mi-info</div>
+        <div class="swatch-hex">#3267A8</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 4. SPACING & RADII -->
+<section class="panel" aria-label="Espaciado y Radios">
+  <h2>4. Espaciado y Radios</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 16px;">
+    <div>
+      <h3 style="font-size: 15px; margin-bottom: 8px;">Escala de Espaciado (4px – 48px)</h3>
+      <div class="spacing-row"><span style="width: 60px; font-size: 12px; font-family: ui-monospace, monospace;">4px</span><div class="spacing-bar" style="width: 4px;"></div></div>
+      <div class="spacing-row"><span style="width: 60px; font-size: 12px; font-family: ui-monospace, monospace;">8px</span><div class="spacing-bar" style="width: 8px;"></div></div>
+      <div class="spacing-row"><span style="width: 60px; font-size: 12px; font-family: ui-monospace, monospace;">12px</span><div class="spacing-bar" style="width: 12px;"></div></div>
+      <div class="spacing-row"><span style="width: 60px; font-size: 12px; font-family: ui-monospace, monospace;">16px</span><div class="spacing-bar" style="width: 16px;"></div></div>
+      <div class="spacing-row"><span style="width: 60px; font-size: 12px; font-family: ui-monospace, monospace;">24px</span><div class="spacing-bar" style="width: 24px;"></div></div>
+      <div class="spacing-row"><span style="width: 60px; font-size: 12px; font-family: ui-monospace, monospace;">32px</span><div class="spacing-bar" style="width: 32px;"></div></div>
+      <div class="spacing-row"><span style="width: 60px; font-size: 12px; font-family: ui-monospace, monospace;">48px</span><div class="spacing-bar" style="width: 48px;"></div></div>
+    </div>
+    <div>
+      <h3 style="font-size: 15px; margin-bottom: 8px;">Radios de Borde</h3>
+      <div class="radii-grid">
+        <div class="radius-box" style="border-radius: var(--mi-radius-control);">4px (control)</div>
+        <div class="radius-box" style="border-radius: var(--mi-radius-chip);">6px (chip)</div>
+        <div class="radius-box" style="border-radius: var(--mi-radius-btn);">8px (button)</div>
+        <div class="radius-box" style="border-radius: var(--mi-radius-card);">12px (card)</div>
+        <div class="radius-box" style="border-radius: var(--mi-radius-modal);">16px (modal)</div>
+        <div class="radius-box" style="border-radius: var(--mi-radius-full);">Full (pill)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. BUTTONS -->
+<section class="panel" aria-label="Botones">
+  <h2>5. Botones y Feedback de Carga</h2>
+  <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 16px;">
+    <button type="button" class="primary">Botón Principal</button>
+    <button type="button" class="secondary">Botón Secundario</button>
+    <button type="button" class="ghost">Botón Ghost</button>
+    <button type="button" class="danger">Botón Peligro</button>
+    <button type="button" class="primary btn-micro">Micro</button>
+    <button type="button" class="primary" disabled>Deshabilitado</button>
+    <button type="button" class="primary" style="display: inline-flex; align-items: center; gap: 8px;">
+      <span class="btn-spinner" aria-hidden="true"></span>
+      <span>Buscando…</span>
+    </button>
+  </div>
+</section>
+
+
+<!-- 6. FORM CONTROLS -->
+<section class="panel" aria-label="Controles de Formulario">
+  <h2>6. Controles de Formulario</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px;">
+    <label style="display: flex; flex-direction: column; gap: 4px;">
+      <span style="font-size: 13px; font-weight: 500;">Texto</span>
+      <input type="text" placeholder="Ej. Arroz Diana 1kg" value="Leche Entera 1L">
+    </label>
+    <label style="display: flex; flex-direction: column; gap: 4px;">
+      <span style="font-size: 13px; font-weight: 500;">Numérico</span>
+      <input type="number" placeholder="0" value="4500">
+    </label>
+    <label style="display: flex; flex-direction: column; gap: 4px;">
+      <span style="font-size: 13px; font-weight: 500;">Búsqueda</span>
+      <input type="search" placeholder="Buscar productos…">
+    </label>
+    <label style="display: flex; flex-direction: column; gap: 4px;">
+      <span style="font-size: 13px; font-weight: 500;">Selector</span>
+      <select>
+        <option>Tiendas D1</option>
+        <option>Almacenes Éxito</option>
+        <option>Cencosud Jumbo</option>
+        <option>Carulla</option>
+        <option>Tiendas Ara</option>
+      </select>
+    </label>
+    <label style="display: flex; flex-direction: column; gap: 4px;">
+      <span style="font-size: 13px; font-weight: 500; color: var(--mi-promo);">Estado de Error</span>
+      <input type="text" value="Valor no válido" style="border-color: var(--mi-promo);">
+      <span style="font-size: 12px; color: var(--mi-promo);">Por favor ingresa un formato correcto</span>
+    </label>
+  </div>
+
+  <div style="display: flex; gap: 24px; flex-wrap: wrap; margin-top: 20px; align-items: center;">
+    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px;">
+      <input type="checkbox" checked>
+      <span>Checkbox Marcado</span>
+    </label>
+    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px;">
+      <input type="checkbox">
+      <span>Checkbox Desmarcado</span>
+    </label>
+    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px;">
+      <input type="radio" name="uikit-radio" checked>
+      <span>Radio Opción A</span>
+    </label>
+    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px;">
+      <input type="radio" name="uikit-radio">
+      <span>Radio Opción B</span>
+    </label>
+    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px;">
+      <input type="checkbox" checked role="switch">
+      <span>Interruptor Activo</span>
+    </label>
+  </div>
+</section>
+
+
+<!-- 7. BADGES & CHIPS -->
+<section class="panel" aria-label="Badges y Chips">
+  <h2>7. Badges de Tienda, Chips de Filtro y Promociones</h2>
+  <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 16px;">
+    <span class="store-badge store-badge-exito">Éxito</span>
+    <span class="store-badge store-badge-d1">D1</span>
+    <span class="store-badge store-badge-jumbo">Jumbo</span>
+    <span class="store-badge store-badge-carulla">Carulla</span>
+    <span class="store-badge store-badge-ara">Ara</span>
+    <span class="discount-pill">-15% OFF</span>
+    <span class="badge badge-verified">Verificado Físicamente</span>
+    <span class="badge" style="background: var(--mi-surface-secondary); color: var(--mi-text-secondary); border-color: var(--mi-border);">En línea</span>
+  </div>
+
+  <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 14px;">
+    <span class="filter-chip">
+      Lácteos <button type="button" aria-label="Eliminar filtro Lácteos">×</button>
+    </span>
+    <span class="filter-chip">
+      Abarrotes <button type="button" aria-label="Eliminar filtro Abarrotes">×</button>
+    </span>
+    <span class="filter-chip">
+      Tiendas D1 <button type="button" aria-label="Eliminar filtro D1">×</button>
+    </span>
+  </div>
+</section>
+
+<!-- 8. PRODUCT CARDS (3 STATES) -->
+<section class="panel" aria-label="Cards de Producto">
+  <h2>8. ProductCard (3 Estados: Con Foto, Placeholder y Promoción)</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 16px;">
+    
+    <!-- State 1: Normal with image -->
+    <article class="product-card" style="border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 16px; background: var(--mi-surface); display: flex; flex-direction: column; gap: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="store-badge store-badge-d1">D1</span>
+        <span class="badge badge-verified" style="font-size: 11px;">Verificado</span>
+      </div>
+      <div style="height: 140px; background: var(--mi-surface-secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+        <img src="/assets/illustrations/product-placeholder.svg" alt="Arroz Diana Premium" style="max-height: 80px; width: auto; opacity: 0.85;">
+      </div>
+      <div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 600; color: var(--mi-text);">Arroz Diana Premium 1000g</h4>
+        <p class="muted" style="margin: 4px 0 0; font-size: 13px;">Diana · 1000g</p>
+      </div>
+      <div style="margin-top: auto;">
+        <div style="display: flex; align-items: baseline; gap: 8px;">
+          <span class="price-value" style="font-size: 20px; font-weight: 700; color: var(--mi-text); font-variant-numeric: tabular-nums;">$4.350</span>
+        </div>
+        <p class="muted" style="font-size: 12px; margin: 2px 0 0;">$4.350/kg · Disponible</p>
+      </div>
+      <button type="button" class="primary" style="width: 100%; padding: 8px 12px; font-size: 13px;">+ Agregar a lista</button>
+    </article>
+
+    <!-- State 2: Placeholder Fallback -->
+    <article class="product-card" style="border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 16px; background: var(--mi-surface); display: flex; flex-direction: column; gap: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="store-badge store-badge-exito">Éxito</span>
+        <span class="badge" style="background: var(--mi-surface-secondary); color: var(--mi-text-secondary); font-size: 11px;">En línea</span>
+      </div>
+      <div style="height: 140px; background: var(--mi-surface-secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        <img src="/assets/illustrations/product-placeholder.svg" alt="Imagen no disponible" style="max-height: 80px; width: auto;">
+      </div>
+      <div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 600; color: var(--mi-text);">Aceite Vegetal Premier 1000ml</h4>
+        <p class="muted" style="margin: 4px 0 0; font-size: 13px;">Premier · 1000ml</p>
+      </div>
+      <div style="margin-top: auto;">
+        <div style="display: flex; align-items: baseline; gap: 8px;">
+          <span class="price-value" style="font-size: 20px; font-weight: 700; color: var(--mi-text); font-variant-numeric: tabular-nums;">$11.200</span>
+        </div>
+        <p class="muted" style="font-size: 12px; margin: 2px 0 0;">$11.200/L · Disponible</p>
+      </div>
+      <button type="button" class="primary" style="width: 100%; padding: 8px 12px; font-size: 13px;">+ Agregar a lista</button>
+    </article>
+
+    <!-- State 3: Promo / Discount -->
+    <article class="product-card" style="border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 16px; background: var(--mi-surface); display: flex; flex-direction: column; gap: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="store-badge store-badge-jumbo">Jumbo</span>
+        <span class="discount-pill">-15% OFF</span>
+      </div>
+      <div style="height: 140px; background: var(--mi-surface-secondary); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        <img src="/assets/illustrations/product-placeholder.svg" alt="Queso Parmesano" style="max-height: 80px; width: auto;">
+      </div>
+      <div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 600; color: var(--mi-text);">Queso Mozzarella Tajado 400g</h4>
+        <p class="muted" style="margin: 4px 0 0; font-size: 13px;">Alpina · 400g</p>
+      </div>
+      <div style="margin-top: auto;">
+        <div style="display: flex; align-items: baseline; gap: 8px;">
+          <span class="price-value" style="font-size: 20px; font-weight: 700; color: var(--mi-promo); font-variant-numeric: tabular-nums;">$9.850</span>
+          <del class="muted" style="font-size: 13px;">$11.600</del>
+        </div>
+        <p class="muted" style="font-size: 12px; margin: 2px 0 0;">$24.625/kg · Ahorro de $1.750</p>
+      </div>
+      <button type="button" class="primary" style="width: 100%; padding: 8px 12px; font-size: 13px;">+ Agregar a lista</button>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- 9. LIST CARD -->
+<section class="panel" aria-label="Card de Lista de Compras">
+  <h2>9. ListCard & Elemento de Lista</h2>
+  <div style="max-width: 520px; margin-top: 16px;">
+    <div class="list-card-preview">
+      <div class="list-card-header">
+        <div>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 700;">Mercado Semanal</h3>
+          <p class="muted" style="margin: 2px 0 0; font-size: 12px;">3 productos seleccionados</p>
+        </div>
+        <div style="text-align: right;">
+          <span class="price-value" style="font-size: 18px; font-weight: 700; color: var(--mi-primary);">$25.400</span>
+          <p class="muted" style="margin: 2px 0 0; font-size: 11px;">Total estimado</p>
+        </div>
+      </div>
+      <div class="list-card-item">
+        <img class="item-thumb" src="/assets/illustrations/product-placeholder.svg" alt="Leche Entera">
+        <div class="item-info">
+          <div class="item-name">Leche Entera 1000ml</div>
+          <div class="item-store">Tiendas D1 · $3.200 c/u</div>
+        </div>
+        <div class="item-qty">
+          <button type="button" aria-label="Reducir cantidad">−</button>
+          <span>2</span>
+          <button type="button" aria-label="Aumentar cantidad">+</button>
+        </div>
+      </div>
+      <div class="list-card-item">
+        <img class="item-thumb" src="/assets/illustrations/product-placeholder.svg" alt="Huevos AA 30u">
+        <div class="item-info">
+          <div class="item-name">Huevos Rojos AA x30</div>
+          <div class="item-store">Almacenes Éxito · $19.000 c/u</div>
+        </div>
+        <div class="item-qty">
+          <button type="button" aria-label="Reducir cantidad">−</button>
+          <span>1</span>
+          <button type="button" aria-label="Aumentar cantidad">+</button>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px;">
+        <button type="button" class="secondary" style="font-size: 13px; padding: 6px 12px;">Ver detalles</button>
+        <button type="button" class="primary" style="font-size: 13px; padding: 6px 12px;">Optimizar canasta</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 10. RETAILER CARD -->
+<section class="panel" aria-label="Card de Tienda y Proveedor">
+  <h2>10. RetailerCard (Supermercado / Fuente)</h2>
+  <div style="max-width: 520px; margin-top: 16px;">
+    <div class="retailer-card-preview">
+      <div class="retailer-logo">
+        <img src="/assets/illustrations/store-placeholder.svg" alt="Tiendas D1">
+      </div>
+      <div class="retailer-details">
+        <div class="retailer-title-row">
+          <h3 style="margin: 0; font-size: 16px; font-weight: 700;">Tiendas D1</h3>
+          <span class="retailer-status-badge available">Disponible</span>
+        </div>
+        <p class="muted" style="margin: 4px 0 0; font-size: 12px;">1.420 productos catalogados · Actualizado hace 2 horas</p>
+        <div style="display: flex; gap: 12px; margin-top: 12px; align-items: center;">
+          <label style="display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer;">
+            <input type="checkbox" checked role="switch">
+            <span>Sincronización automática</span>
+          </label>
+        </div>
+        <div style="display: flex; gap: 8px; margin-top: 12px;">
+          <button type="button" class="secondary" style="font-size: 12px; padding: 5px 10px;">Sincronizar ahora</button>
+          <button type="button" class="ghost" style="font-size: 12px; padding: 5px 10px;">Configurar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. CHARTS PREVIEW -->
+<section class="panel" aria-label="Visualización de Precios e Histórico">
+  <h2>11. Visualización de Precios (Tendencia 30 Días)</h2>
+  <div style="max-width: 600px; margin-top: 16px; border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 16px; background: var(--mi-surface);">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px;">
+      <div>
+        <h4 style="margin: 0; font-size: 14px; font-weight: 600;">Evolución de Precio: Arroz Diana 1kg</h4>
+        <span class="muted" style="font-size: 12px;">Últimos 30 días · 4 observaciones</span>
+      </div>
+      <span class="price-value" style="font-size: 16px; font-weight: 700; color: var(--mi-primary);">$4.350</span>
+    </div>
+    <div style="width: 100%; height: 160px;">
+      <svg viewBox="0 0 500 140" style="width: 100%; height: 100%; overflow: visible;" aria-label="Gráfica de tendencia">
+        <line x1="40" y1="20" x2="480" y2="20" stroke="var(--mi-border)" stroke-dasharray="3,3" />
+        <line x1="40" y1="70" x2="480" y2="70" stroke="var(--mi-border)" stroke-dasharray="3,3" />
+        <line x1="40" y1="120" x2="480" y2="120" stroke="var(--mi-border)" stroke-dasharray="3,3" />
+        <text x="32" y="24" fill="var(--mi-muted)" font-size="10" text-anchor="end">$4.800</text>
+        <text x="32" y="74" fill="var(--mi-muted)" font-size="10" text-anchor="end">$4.500</text>
+        <text x="32" y="124" fill="var(--mi-muted)" font-size="10" text-anchor="end">$4.200</text>
+        <path d="M 60,30 Q 150,45 220,60 T 360,95 T 460,110" fill="none" stroke="var(--mi-primary)" stroke-width="3" stroke-linecap="round" />
+        <circle cx="60" cy="30" r="4" fill="var(--mi-surface)" stroke="var(--mi-primary)" stroke-width="2" />
+        <circle cx="220" cy="60" r="4" fill="var(--mi-surface)" stroke="var(--mi-primary)" stroke-width="2" />
+        <circle cx="360" cy="95" r="4" fill="var(--mi-surface)" stroke="var(--mi-primary)" stroke-width="2" />
+        <circle cx="460" cy="110" r="5" fill="var(--mi-primary)" stroke="var(--mi-surface)" stroke-width="2" />
+        <text x="60" y="138" fill="var(--mi-muted)" font-size="10" text-anchor="middle">15 Sep</text>
+        <text x="220" y="138" fill="var(--mi-muted)" font-size="10" text-anchor="middle">25 Sep</text>
+        <text x="360" y="138" fill="var(--mi-muted)" font-size="10" text-anchor="middle">05 Oct</text>
+        <text x="460" y="138" fill="var(--mi-muted)" font-size="10" text-anchor="middle">Hoy</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+
+<!-- 12. MODAL PREVIEW -->
+<section class="panel" aria-label="Diálogo Modal Accesible">
+  <h2>12. Modal Dialog Accesible</h2>
+  <div style="max-width: 440px; border: 1px solid var(--mi-border-strong); border-radius: var(--mi-radius-modal); padding: 20px; background: var(--mi-surface); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); margin-top: 16px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+      <h3 style="margin: 0; font-size: 17px; font-weight: 700;">Agregar a Lista de Mercado</h3>
+      <button type="button" class="ghost btn-micro" aria-label="Cerrar modal" style="font-size: 16px;">×</button>
+    </div>
+    <p class="muted" style="margin: 0 0 16px; font-size: 13px;">Selecciona la lista destino para calcular la canasta combinada.</p>
+    <label style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px;">
+      <span style="font-size: 13px; font-weight: 500;">Lista de compras:</span>
+      <select>
+        <option>Mi mercado mensual (18 productos)</option>
+        <option>Asado familiar (6 productos)</option>
+        <option>+ Crear nueva lista…</option>
+      </select>
+    </label>
+    <div style="display: flex; justify-content: flex-end; gap: 8px;">
+      <button type="button" class="secondary">Cancelar</button>
+      <button type="button" class="primary">Confirmar y agregar</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- 13. DRAWER PREVIEW -->
+<section class="panel" aria-label="Drawer de Detalle">
+  <h2>13. Product Detail Drawer (~400px Lateral)</h2>
+  <div style="max-width: 400px; border: 1px solid var(--mi-border-strong); border-radius: var(--mi-radius-card); background: var(--mi-surface); box-shadow: 0 8px 30px rgba(0,0,0,0.08); overflow: hidden; margin-top: 16px;">
+    <div style="padding: 14px 16px; border-bottom: 1px solid var(--mi-border); display: flex; justify-content: space-between; align-items: center;">
+      <span style="font-size: 14px; font-weight: 600; color: var(--mi-text);">Ficha de Producto</span>
+      <button type="button" class="ghost btn-micro" aria-label="Cerrar drawer">×</button>
+    </div>
+    <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="height: 150px; background: var(--mi-surface-secondary); border-radius: var(--mi-radius-control); display: flex; align-items: center; justify-content: center;">
+        <img src="/assets/illustrations/product-placeholder.svg" alt="Café Matiz" style="max-height: 90px; width: auto;">
+      </div>
+      <div>
+        <span class="store-badge store-badge-exito">Almacenes Éxito</span>
+        <h3 style="margin: 6px 0 0; font-size: 17px; font-weight: 700;">Café Matiz Ámbar Molido 500g</h3>
+        <p class="muted" style="margin: 2px 0 0; font-size: 13px;">Matiz · 500g · Código: EXT-9481</p>
+      </div>
+      <div style="background: var(--mi-surface-secondary); padding: 12px; border-radius: 8px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+          <span class="price-value" style="font-size: 22px; font-weight: 700; color: var(--mi-text);">$24.900</span>
+          <span style="font-size: 13px; font-weight: 600; color: var(--mi-primary);">$49.800/kg</span>
+        </div>
+        <p class="muted" style="font-size: 12px; margin: 4px 0 0;">Precio verificado · En stock en tienda física</p>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button type="button" class="primary" style="flex: 1;">+ Agregar a mi lista</button>
+        <button type="button" class="secondary">Ver en tienda</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 14. TOAST / ALERT PREVIEWS -->
+<section class="panel" aria-label="Alertas y Notificaciones">
+  <h2>14. Alertas y Notificaciones (Toast)</h2>
+  <div style="display: flex; flex-direction: column; gap: 10px; max-width: 520px; margin-top: 16px;">
+    <div class="alert alert-success" style="display: flex; align-items: center; justify-content: space-between;">
+      <span><strong>¡Éxito!</strong> Lista de compras guardada correctamente.</span>
+      <button type="button" class="ghost btn-micro" aria-label="Cerrar alerta">×</button>
+    </div>
+    <div class="alert alert-info" style="display: flex; align-items: center; justify-content: space-between;">
+      <span><strong>Información:</strong> Sincronización de Tiendas D1 completada (142 nuevos precios).</span>
+      <button type="button" class="ghost btn-micro" aria-label="Cerrar alerta">×</button>
+    </div>
+    <div class="alert alert-warning" style="display: flex; align-items: center; justify-content: space-between;">
+      <span><strong>Atención:</strong> 2 productos de tu lista cambiaron de precio hoy.</span>
+      <button type="button" class="ghost btn-micro" aria-label="Cerrar alerta">×</button>
+    </div>
+    <div class="alert alert-danger" style="display: flex; align-items: center; justify-content: space-between;">
+      <span><strong>Error:</strong> No se pudo conectar con el catálogo de Cencosud Jumbo.</span>
+      <button type="button" class="ghost btn-micro" aria-label="Cerrar alerta">×</button>
+    </div>
+  </div>
+</section>
+
+<!-- 15. SKELETON LOADING -->
+<section class="panel" aria-label="Skeleton Loading">
+  <h2>15. Skeleton Loading (Cards de Producto)</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 16px;">
+    <article class="product-card" style="border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 16px; background: var(--mi-surface); display: flex; flex-direction: column; gap: 12px;">
+      <div class="skeleton" style="height: 18px; width: 35%;"></div>
+      <div class="skeleton" style="height: 130px; width: 100%;"></div>
+      <div class="skeleton" style="height: 20px; width: 85%;"></div>
+      <div class="skeleton" style="height: 14px; width: 50%;"></div>
+      <div class="skeleton" style="height: 26px; width: 45%; margin-top: auto;"></div>
+      <div class="skeleton" style="height: 36px; width: 100%;"></div>
+    </article>
+    <article class="product-card" style="border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 16px; background: var(--mi-surface); display: flex; flex-direction: column; gap: 12px;">
+      <div class="skeleton" style="height: 18px; width: 40%;"></div>
+      <div class="skeleton" style="height: 130px; width: 100%;"></div>
+      <div class="skeleton" style="height: 20px; width: 75%;"></div>
+      <div class="skeleton" style="height: 14px; width: 40%;"></div>
+      <div class="skeleton" style="height: 26px; width: 50%; margin-top: auto;"></div>
+      <div class="skeleton" style="height: 36px; width: 100%;"></div>
+    </article>
+  </div>
+</section>
+
+
+<!-- 16. EMPTY STATES -->
+<section class="panel" aria-label="Estados Vacíos">
+  <h2>16. Estados Vacíos Oficiales (Ilustraciones SVG)</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 16px;">
+    
+    <!-- Empty Search -->
+    <div style="border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 24px 16px; background: var(--mi-surface); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+      <img src="/assets/illustrations/empty-search.svg" alt="Búsqueda sin resultados" style="height: 96px; width: auto;">
+      <div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 700;">No encontramos coincidencias</h4>
+        <p class="muted" style="margin: 4px 0 0; font-size: 13px;">Prueba ajustando los términos o borrando filtros aplicados.</p>
+      </div>
+      <button type="button" class="secondary" style="font-size: 13px;">Limpiar filtros</button>
+    </div>
+
+    <!-- Empty Lists -->
+    <div style="border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 24px 16px; background: var(--mi-surface); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+      <img src="/assets/illustrations/empty-lists.svg" alt="Sin listas creadas" style="height: 96px; width: auto;">
+      <div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 700;">Aún no tienes listas</h4>
+        <p class="muted" style="margin: 4px 0 0; font-size: 13px;">Crea tu primera lista para comparar precios entre tiendas.</p>
+      </div>
+      <button type="button" class="primary" style="font-size: 13px;">+ Crear mi primera lista</button>
+    </div>
+
+    <!-- Empty History -->
+    <div style="border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 24px 16px; background: var(--mi-surface); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+      <img src="/assets/illustrations/empty-history.svg" alt="Sin historial de precios" style="height: 96px; width: auto;">
+      <div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 700;">Sin historial acumulado</h4>
+        <p class="muted" style="margin: 4px 0 0; font-size: 13px;">Las tendencias históricas se registrarán con cada sincronización.</p>
+      </div>
+      <button type="button" class="secondary" style="font-size: 13px;">Explorar catálogo</button>
+    </div>
+
+    <!-- Empty Analysis -->
+    <div style="border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); padding: 24px 16px; background: var(--mi-surface); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+      <img src="/assets/illustrations/empty-analysis.svg" alt="Sin análisis disponible" style="height: 96px; width: auto;">
+      <div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 700;">Datos insuficientes para análisis</h4>
+        <p class="muted" style="margin: 4px 0 0; font-size: 13px;">Agrega productos a tu lista o activa más tiendas para calcular ahorros.</p>
+      </div>
+      <button type="button" class="secondary" style="font-size: 13px;">Gestionar fuentes</button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- 17. ASSISTANT FAB & PREVIEW -->
+<section class="panel" aria-label="Asistente de Compras">
+  <h2>17. Asistente de Compras (FAB y Panel de Consulta)</h2>
+  <p class="muted" style="margin-top: 4px; font-size: 13px;">Identidad sobria: sin sparkles, robots ni clichés visuales. Nombre oficial: Asistente o Asistente de compras.</p>
+  <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; margin-top: 16px;">
+    
+    <div>
+      <h4 style="margin: 0 0 10px; font-size: 14px;">Botón Flotante (FAB)</h4>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button type="button" class="assistant-fab-preview" aria-label="Abrir asistente de compras">
+          <img src="/assets/icons/assistant-shopping.svg" alt="Icono Asistente">
+        </button>
+        <span class="muted" style="font-size: 13px;">52×52px con icono outline</span>
+      </div>
+    </div>
+
+    <div style="flex: 1; min-width: 300px; max-width: 440px; border: 1px solid var(--mi-border); border-radius: var(--mi-radius-card); background: var(--mi-surface); box-shadow: 0 4px 20px rgba(0,0,0,0.06); padding: 16px;">
+      <div style="display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--mi-border);">
+        <img src="/assets/icons/assistant-shopping.svg" alt="" style="width: 22px; height: 22px;">
+        <div>
+          <h4 style="margin: 0; font-size: 15px; font-weight: 700;">Asistente de compras</h4>
+          <span style="font-size: 11px; color: var(--mi-primary); font-weight: 600;">En línea · Basado en tus precios locales</span>
+        </div>
+      </div>
+      <div style="padding: 14px 0; display: flex; flex-direction: column; gap: 10px;">
+        <div style="background: var(--mi-surface-secondary); padding: 10px 14px; border-radius: 12px; font-size: 13px; color: var(--mi-text); line-height: 1.4;">
+          Hola, ¿en qué producto o lista necesitas optimizar tu presupuesto hoy?
+        </div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+          <button type="button" class="suggestion-chip">¿Cuál conviene más?</button>
+          <button type="button" class="suggestion-chip">¿Dónde ahorro?</button>
+          <button type="button" class="suggestion-chip">Mejor precio por kilo</button>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; border-top: 1px solid var(--mi-border); padding-top: 10px;">
+        <input type="text" placeholder="Pregunta sobre productos o canastas…" style="flex: 1; font-size: 13px; padding: 7px 10px;">
+        <button type="button" class="primary" style="padding: 7px 12px; font-size: 13px;">Consultar</button>
+      </div>
+    </div>
+
+  </div>
+</section>

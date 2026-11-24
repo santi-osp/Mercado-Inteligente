@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022C22" />
+      <stop offset="50%" stop-color="#04382B" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#065F46" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#044E39" stop-opacity="0.8" />
+    </linearGradient>
+
+    <linearGradient id="cardGradAlt" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F766E" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#115E59" stop-opacity="0.8" />
+    </linearGradient>
+
+    <linearGradient id="accentLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#011812" flood-opacity="0.6" />
+    </filter>
+
+    <pattern id="archGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1100" height="520" rx="16" fill="url(#bgGrad)" />
+  <rect width="1100" height="520" rx="16" fill="url(#archGrid)" />
+
+  <!-- Outer Border -->
+  <rect x="1" y="1" width="1098" height="518" rx="15" fill="none" stroke="rgba(52, 211, 153, 0.2)" stroke-width="1.5" />
+
+  <!-- Section Title -->
+  <g transform="translate(40, 42)">
+    <circle cx="10" cy="10" r="4.5" fill="#34D399" />
+    <text x="24" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#6EE7B7" letter-spacing="1.5">ARQUITECTURA DEL SISTEMA LOCAL-FIRST</text>
+    <text x="0" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="800" fill="#FFFFFF">Flujo Desacoplado con Privacidad Absoluta</text>
+  </g>
+
+  <!-- 1. FRONTEND LAYER -->
+  <g transform="translate(40, 120)" filter="url(#shadow)">
+    <rect width="280" height="340" rx="12" fill="url(#cardGrad)" stroke="rgba(52, 211, 153, 0.35)" stroke-width="1" />
+    <rect x="0" y="0" width="280" height="6" rx="3" fill="#DD0031" />
+    <text x="24" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">CAPA CLIENTE (PWA)</text>
+    <text x="24" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="400" fill="#A7F3D0">Angular 20 Standalone UI</text>
+
+    <!-- Sub-elements -->
+    <rect x="20" y="80" width="240" height="50" rx="8" fill="rgba(0, 0, 0, 0.25)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    <text x="34" y="103" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">🎨 Reactive UI &amp; Signals</text>
+    <text x="34" y="119" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="400" fill="#9CA3AF">Gestión de estado reactivo y granular</text>
+
+    <rect x="20" y="142" width="240" height="50" rx="8" fill="rgba(0, 0, 0, 0.25)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    <text x="34" y="165" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">📱 Mobile-First PWA</text>
+    <text x="34" y="181" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="400" fill="#9CA3AF">Service Worker, caché y modo offline</text>
+
+    <rect x="20" y="204" width="240" height="50" rx="8" fill="rgba(0, 0, 0, 0.25)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    <text x="34" y="227" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">🤖 Asistente Conversacional</text>
+    <text x="34" y="243" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="400" fill="#9CA3AF">Búsqueda semántica &amp; sugerencias</text>
+
+    <rect x="20" y="266" width="240" height="50" rx="8" fill="rgba(0, 0, 0, 0.25)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    <text x="34" y="289" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">📊 Visualizador de Tendencias</text>
+    <text x="34" y="305" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="400" fill="#9CA3AF">Gráficos de inflación y canasta</text>
+  </g>
+
+  <!-- Connect 1 -> 2 -->
+  <g transform="translate(320, 280)">
+    <line x1="0" y1="0" x2="70" y2="0" stroke="url(#accentLine)" stroke-width="2.5" stroke-dasharray="6,4" />
+    <polygon points="75,0 65,-4 65,4" fill="#34D399" />
+    <rect x="12" y="-18" width="50" height="18" rx="4" fill="#064E3B" />
+    <text x="18" y="-5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="700" fill="#A7F3D0">REST API</text>
+  </g>
+
+  <!-- 2. CORE BACKEND LAYER -->
+  <g transform="translate(400, 120)" filter="url(#shadow)">
+    <rect width="320" height="340" rx="12" fill="url(#cardGrad)" stroke="rgba(52, 211, 153, 0.35)" stroke-width="1" />
+    <rect x="0" y="0" width="320" height="6" rx="3" fill="#512BD4" />
+    <text x="24" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">MOTOR BACKEND (.NET 10)</text>
+    <text x="24" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="400" fill="#A7F3D0">ASP.NET Core Clean Architecture</text>
+
+    <!-- Sub-elements -->
+    <rect x="20" y="80" width="280" height="50" rx="8" fill="rgba(0, 0, 0, 0.25)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    <text x="34" y="103" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">⚖️ Motor de Normalización</text>
+    <text x="34" y="119" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="400" fill="#9CA3AF">Precio por g, ml, und &amp; equivalencias</text>
+
+    <rect x="20" y="142" width="280" height="50" rx="8" fill="rgba(0, 0, 0, 0.25)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    <text x="34" y="165" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">🎯 Optimizador Heurístico</text>
+    <text x="34" y="181" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="400" fill="#9CA3AF">Algoritmo Mono vs Multi-Tienda Óptima</text>
+
+    <rect x="20" y="204" width="280" height="50" rx="8" fill="rgba(0, 0, 0, 0.25)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    <text x="34" y="227" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">🔄 Conectores de Sincronización</text>
+    <text x="34" y="243" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="400" fill="#9CA3AF">Scrapers controlados de D1, Éxito y Ara</text>
+
+    <rect x="20" y="266" width="280" height="50" rx="8" fill="rgba(0, 0, 0, 0.25)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    <text x="34" y="289" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">🔒 Capa de Datos &amp; EF Core 10</text>
+    <text x="34" y="305" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="400" fill="#9CA3AF">Repositorios, CQRS &amp; migraciones</text>
+  </g>
+
+  <!-- Connect 2 -> 3 -->
+  <g transform="translate(720, 205)">
+    <line x1="0" y1="0" x2="65" y2="0" stroke="url(#accentLine)" stroke-width="2.5" stroke-dasharray="6,4" />
+    <polygon points="70,0 60,-4 60,4" fill="#34D399" />
+    <text x="15" y="-8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="700" fill="#A7F3D0">EF Core</text>
+  </g>
+
+  <g transform="translate(720, 360)">
+    <line x1="0" y1="0" x2="65" y2="0" stroke="url(#goldGrad)" stroke-width="2.5" stroke-dasharray="6,4" />
+    <polygon points="70,0 60,-4 60,4" fill="#FBBF24" />
+    <text x="12" y="-8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="700" fill="#FDE68A">Sync Out</text>
+  </g>
+
+  <!-- 3. STORAGE & EXTERNAL LAYER -->
+  <g transform="translate(795, 120)" filter="url(#shadow)">
+    <!-- SQLite Local Storage -->
+    <rect width="265" height="155" rx="12" fill="url(#cardGradAlt)" stroke="rgba(20, 184, 166, 0.4)" stroke-width="1" />
+    <rect x="0" y="0" width="265" height="6" rx="3" fill="#003B57" />
+    <text x="20" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">💾 SQLite Local Storage</text>
+    <text x="20" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400" fill="#CCFBF1">Almacenamiento 100% en Máquina</text>
+
+    <text x="20" y="80" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#E2E8F0">✓ Catálogo de productos local</text>
+    <text x="20" y="100" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#E2E8F0">✓ Históricos y variaciones de precio</text>
+    <text x="20" y="120" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#E2E8F0">✓ Listas de compras personales</text>
+    <text x="20" y="140" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#34D399" font-weight="600">✓ Cero telemetría externa</text>
+
+    <!-- Supermarket Sources -->
+    <g transform="translate(0, 175)">
+      <rect width="265" height="165" rx="12" fill="rgba(6, 78, 59, 0.5)" stroke="rgba(245, 158, 11, 0.4)" stroke-width="1" />
+      <rect x="0" y="0" width="265" height="6" rx="3" fill="#F59E0B" />
+      <text x="20" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#FCD34D">🛒 Fuentes Supermercados</text>
+      <text x="20" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400" fill="#FDE68A">Sincronización Opcional &amp; On-Demand</text>
+
+      <rect x="18" y="70" width="229" height="24" rx="4" fill="rgba(239, 68, 68, 0.2)" stroke="rgba(239, 68, 68, 0.5)" stroke-width="1" />
+      <text x="28" y="86" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#FECACA">🔴 Tiendas D1 (Scraper API)</text>
+
+      <rect x="18" y="100" width="229" height="24" rx="4" fill="rgba(234, 179, 8, 0.2)" stroke="rgba(234, 179, 8, 0.5)" stroke-width="1" />
+      <text x="28" y="116" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#FEF08A">🟡 Almacenes Éxito (VTEX / GraphQL)</text>
+
+      <rect x="18" y="130" width="229" height="24" rx="4" fill="rgba(249, 115, 22, 0.2)" stroke="rgba(249, 115, 22, 0.5)" stroke-width="1" />
+      <text x="28" y="146" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#FFEDD5">🟠 Tiendas Ara (Conector Extensible)</text>
+    </g>
+  </g>
+
+  <!-- Bottom Footer Pill -->
+  <g transform="translate(360, 480)">
+    <rect width="380" height="26" rx="13" fill="rgba(0, 0, 0, 0.3)" stroke="rgba(52, 211, 153, 0.3)" stroke-width="1" />
+    <circle cx="15" cy="13" r="3.5" fill="#10B981" />
+    <text x="28" y="17" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="500" fill="#A7F3D0">Desarrollado con Clean Architecture · .NET 10 · Angular 20 · SQLite</text>
+  </g>
+</svg>

@@ -1,0 +1,125 @@
+{
+  "configVersion": 1,
+  "timestamp": 1792141684976,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main-F7F3JQJR.js",
+        "/manifest.webmanifest",
+        "/polyfills-5CFQRCPP.js",
+        "/styles-IBTJSCHF.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/android-chrome-192x192.png",
+        "/android-chrome-512x512.png",
+        "/app-icon-180x180.png",
+        "/app-icon-192x192.png",
+        "/app-icon-512x512.png",
+        "/apple-touch-icon.png",
+        "/assets/brand/logo-primary.png",
+        "/assets/brand/mark-flat.svg",
+        "/assets/brand/mark-mono.svg",
+        "/assets/brand/mark-primary-512.png",
+        "/assets/brand/mark-primary.png",
+        "/assets/brand/mark.svg",
+        "/assets/icons/assistant-shopping.svg",
+        "/assets/illustrations/empty-analysis.svg",
+        "/assets/illustrations/empty-history.svg",
+        "/assets/illustrations/empty-lists.svg",
+        "/assets/illustrations/empty-search.svg",
+        "/assets/illustrations/hero-pattern.svg",
+        "/assets/illustrations/product-placeholder.svg",
+        "/assets/illustrations/store-placeholder.svg",
+        "/favicon-16x16.png",
+        "/favicon-32x32.png",
+        "/favicon.svg",
+        "/icons/icon-128x128.png",
+        "/icons/icon-144x144.png",
+        "/icons/icon-152x152.png",
+        "/icons/icon-192x192.png",
+        "/icons/icon-384x384.png",
+        "/icons/icon-512x512.png",
+        "/icons/icon-72x72.png",
+        "/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/android-chrome-192x192.png": "c6fbb2ca39376e2414408e6b837a4b97d5789cb0",
+    "/android-chrome-512x512.png": "0d3d4ff2e8a76ba1c7bd55ef139b6a5f33b6e420",
+    "/app-icon-180x180.png": "c77246d1d62b6357d7af1045db5c02063d9b3811",
+    "/app-icon-192x192.png": "c6fbb2ca39376e2414408e6b837a4b97d5789cb0",
+    "/app-icon-512x512.png": "0d3d4ff2e8a76ba1c7bd55ef139b6a5f33b6e420",
+    "/apple-touch-icon.png": "c77246d1d62b6357d7af1045db5c02063d9b3811",
+    "/assets/brand/logo-primary.png": "5631321bbc8584957c0e697610e0d0cf108e3860",
+    "/assets/brand/mark-flat.svg": "cfb621ab9fe96a1aa5d6802849c341ab125abc76",
+    "/assets/brand/mark-mono.svg": "2cd3b8674dcfd7ed8466dfc6ac8ccfcd4c9a86ff",
+    "/assets/brand/mark-primary-512.png": "d174f5e3e7d76af634aec0d9dea3cd96cf566681",
+    "/assets/brand/mark-primary.png": "32983ece00e4f1da02af8592897814cb84005f01",
+    "/assets/brand/mark.svg": "cfb621ab9fe96a1aa5d6802849c341ab125abc76",
+    "/assets/icons/assistant-shopping.svg": "235fbdc5127578c267b528032922d79a69817c2c",
+    "/assets/illustrations/empty-analysis.svg": "3aec09fb71df7d74339e84e427e332d3a9da18c7",
+    "/assets/illustrations/empty-history.svg": "621ecd5e20a578644caa6d42789491b8e598efe9",
+    "/assets/illustrations/empty-lists.svg": "d3cdcb64920daa7fe9495401b0bb45563c139818",
+    "/assets/illustrations/empty-search.svg": "63841207d36d96cd955d8d6bd4dc68aca108c699",
+    "/assets/illustrations/hero-pattern.svg": "4a50072a26c0f6108e410271da6c7686306cc7de",
+    "/assets/illustrations/product-placeholder.svg": "bc5073505bb7ca611ee04590a7d7bce0bce8910c",
+    "/assets/illustrations/store-placeholder.svg": "7c4bb03b29724d013154b577c9ab1943812768b7",
+    "/favicon-16x16.png": "01244159515d71af0c88f14dc03025ce99450207",
+    "/favicon-32x32.png": "254147f74099aa5764f17dda7ccbd202bbd10b81",
+    "/favicon.ico": "bd445ecedea97ea4dc1658e6831a95369b33f5da",
+    "/favicon.svg": "cfb621ab9fe96a1aa5d6802849c341ab125abc76",
+    "/icons/icon-128x128.png": "5569a92492e9af85006423332c0e68fe9a432363",
+    "/icons/icon-144x144.png": "60cc30be81e450cb2a68f87c768d88d68e666ac9",
+    "/icons/icon-152x152.png": "60cc30be81e450cb2a68f87c768d88d68e666ac9",
+    "/icons/icon-192x192.png": "60cc30be81e450cb2a68f87c768d88d68e666ac9",
+    "/icons/icon-384x384.png": "bd51d21fcef4b3e6151d5fcfd0dadc9ed4cdeb43",
+    "/icons/icon-512x512.png": "bd51d21fcef4b3e6151d5fcfd0dadc9ed4cdeb43",
+    "/icons/icon-72x72.png": "6f37f891104b65f1c5af405561b023db419d204e",
+    "/icons/icon-96x96.png": "5569a92492e9af85006423332c0e68fe9a432363",
+    "/index.html": "70e43aa404fcd04eefbdbaf55e289e6462f59bdb",
+    "/main-F7F3JQJR.js": "a5362e03b4d8c7948f6720b99810c6542578e60a",
+    "/manifest.webmanifest": "c5a3e565456ea69069c8ffecd1c91fcd966b6d69",
+    "/polyfills-5CFQRCPP.js": "f2241e9a25858f895ce299d15f6f22e849e2fd72",
+    "/styles-IBTJSCHF.css": "81428cd59acf7d8332a51c19cbf8fc8c742ceece"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

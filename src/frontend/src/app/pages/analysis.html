@@ -1,0 +1,629 @@
+<section class="feature-page animate-in">
+  <!-- Mini Hero -->
+  <header class="mini-hero">
+    <div class="mini-hero-badge">Análisis de Compras</div>
+    <h1 class="mini-hero-title">Analiza antes de comprar</h1>
+    <p class="mini-hero-subtitle">
+      1.520 productos analizados · 5 tiendas · Descubre qué opciones ofrecen el mejor valor por tu dinero.
+    </p>
+  </header>
+
+  <!-- Pestañas de Navegación -->
+  <div class="tabs-nav mb-6">
+    <button 
+      type="button" 
+      class="tab-btn" 
+      [class.active]="analysis.activeTab() === 'opportunities'"
+      (click)="setActiveTab('opportunities')">
+      Oportunidades del mercado
+    </button>
+    <button 
+      type="button" 
+      class="tab-btn" 
+      [class.active]="analysis.activeTab() === 'product'"
+      (click)="setActiveTab('product')">
+      Análisis de producto
+    </button>
+    <button 
+      type="button" 
+      class="tab-btn" 
+      [class.active]="analysis.activeTab() === 'basket'"
+      (click)="setActiveTab('basket')">
+      Análisis de listas
+    </button>
+  </div>
+
+  <!-- PESTAÑA 1: OPORTUNIDADES DEL MERCADO -->
+  @if (analysis.activeTab() === 'opportunities') {
+    <div class="tab-content animate-in">
+      <div class="flex-between mb-4">
+        <div>
+          <h2 class="section-title">Oportunidades destacadas en el mercado</h2>
+          <p class="text-muted text-sm">Detectadas automáticamente mediante precios por unidad, descuentos e historial.</p>
+        </div>
+        <button type="button" class="btn btn-secondary btn-sm" (click)="analysis.loadOpportunities()" [disabled]="analysis.opportunitiesLoading()">
+          @if (analysis.opportunitiesLoading()) { Analizando… } @else { Actualizar }
+        </button>
+      </div>
+
+      @if (analysis.opportunitiesLoading()) {
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Buscando las mejores oportunidades en todas las cadenas...</p>
+        </div>
+      } @else if (analysis.opportunitiesError()) {
+        <div class="alert alert-danger mb-4">
+          {{ analysis.opportunitiesError() }}
+        </div>
+      } @else if (!analysis.opportunities() || (analysis.opportunities()!.bestValueItems.length === 0 && analysis.opportunities()!.highestDiscounts.length === 0 && analysis.opportunities()!.bestUnitPrices.length === 0)) {
+        <div class="empty-state">
+          <div class="empty-icon" style="margin-bottom: 12px;">
+            <img src="/assets/illustrations/empty-analysis.svg" alt="" style="width: 120px; height: 120px; max-width: 100%;">
+          </div>
+          <h3>Sin oportunidades detectadas aún</h3>
+          <p class="text-muted">Sincroniza el catálogo para registrar precios y calcular oportunidades automáticamente.</p>
+          <button type="button" class="btn btn-primary mt-3" (click)="analysis.loadOpportunities()">
+            Buscar de nuevo
+          </button>
+        </div>
+      } @else {
+        <!-- Subsección: Mejor relación valor-precio -->
+        @if (analysis.opportunities()!.bestValueItems.length > 0) {
+          <div class="mb-6">
+            <h3 class="font-bold text-lg mb-3 flex-center-start gap-2">
+              Mejor relación valor-precio
+            </h3>
+            <div class="opportunities-grid">
+              @for (opp of analysis.opportunities()!.bestValueItems; track opp.productId + opp.retailerCode) {
+                <article class="opportunity-card">
+                  <div class="opp-header">
+                    <span class="store-badge store-badge-{{ opp.retailerCode.toLowerCase() }}">
+                      {{ opp.retailerName }}
+                    </span>
+                    <span class="score-badge" [class]="analysis.getValueScoreClass(opp.valueScore)">
+                      {{ opp.valueScore }}/100 · {{ analysis.getValueScoreLabel(opp.valueScore) }}
+                    </span>
+                  </div>
+
+                  <h4 class="opp-product-name">{{ opp.productName }}</h4>
+                  @if (opp.brand) {
+                    <div class="text-xs text-muted mb-2">Marca: {{ opp.brand }}</div>
+                  }
+
+                  <div class="opp-pricing">
+                    <div class="current-price">
+                      ${{ opp.price | number:'1.0-0' }}
+                    </div>
+                    @if (opp.listPrice && opp.listPrice > opp.price) {
+                      <div class="previous-price">
+                        Antes: ${{ opp.listPrice | number:'1.0-0' }}
+                      </div>
+                    }
+                  </div>
+
+                  <div class="opp-metrics">
+                    @if (opp.discountPercent && opp.discountPercent > 0) {
+                      <span class="metric-pill discount">
+                        -{{ opp.discountPercent | number:'1.0-0' }}%
+                      </span>
+                    }
+                    @if (opp.unitPriceText) {
+                      <span class="metric-pill unit-price">
+                        {{ opp.unitPriceText }}
+                      </span>
+                    }
+                    @if (opp.highlight) {
+                      <span class="metric-pill highlight">
+                        {{ opp.highlight }}
+                      </span>
+                    }
+                  </div>
+
+                  <div class="opp-actions mt-3">
+                    <button 
+                      type="button" 
+                      class="btn btn-outline btn-sm w-full"
+                      (click)="analyzeProduct(opp.productId)">
+                      Analizar a fondo →
+                    </button>
+                  </div>
+                </article>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Subsección: Mayores Descuentos -->
+        @if (analysis.opportunities()!.highestDiscounts.length > 0) {
+          <div class="mb-6">
+            <h3 class="font-bold text-lg mb-3 flex-center-start gap-2">
+              Mayores descuentos
+            </h3>
+            <div class="opportunities-grid">
+              @for (opp of analysis.opportunities()!.highestDiscounts; track opp.productId + opp.retailerCode) {
+                <article class="opportunity-card">
+                  <div class="opp-header">
+                    <span class="store-badge store-badge-{{ opp.retailerCode.toLowerCase() }}">
+                      {{ opp.retailerName }}
+                    </span>
+                    @if (opp.discountPercent) {
+                      <span class="badge badge-danger">
+                        -{{ opp.discountPercent | number:'1.0-0' }}% OFF
+                      </span>
+                    }
+                  </div>
+
+                  <h4 class="opp-product-name">{{ opp.productName }}</h4>
+
+                  <div class="opp-pricing">
+                    <div class="current-price text-danger">
+                      ${{ opp.price | number:'1.0-0' }}
+                    </div>
+                    @if (opp.listPrice) {
+                      <div class="previous-price">
+                        Antes: ${{ opp.listPrice | number:'1.0-0' }}
+                      </div>
+                    }
+                  </div>
+
+                  <div class="opp-metrics">
+                    @if (opp.unitPriceText) {
+                      <span class="metric-pill unit-price">
+                        {{ opp.unitPriceText }}
+                      </span>
+                    }
+                    <span class="score-badge" [class]="analysis.getValueScoreClass(opp.valueScore)">
+                      Valor de compra: {{ opp.valueScore }}/100
+                    </span>
+                  </div>
+
+                  <div class="opp-actions mt-3">
+                    <button 
+                      type="button" 
+                      class="btn btn-outline btn-sm w-full"
+                      (click)="analyzeProduct(opp.productId)">
+                      Analizar a fondo →
+                    </button>
+                  </div>
+                </article>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Subsección: Mejor Precio por Unidad -->
+        @if (analysis.opportunities()!.bestUnitPrices.length > 0) {
+          <div class="mb-6">
+            <h3 class="font-bold text-lg mb-3 flex-center-start gap-2">
+              Mejor precio por unidad
+            </h3>
+            <div class="opportunities-grid">
+              @for (opp of analysis.opportunities()!.bestUnitPrices; track opp.productId + opp.retailerCode) {
+                <article class="opportunity-card">
+                  <div class="opp-header">
+                    <span class="store-badge store-badge-{{ opp.retailerCode.toLowerCase() }}">
+                      {{ opp.retailerName }}
+                    </span>
+                    <span class="badge badge-success">
+                      {{ opp.unitPriceText || 'Mejor rendimiento' }}
+                    </span>
+                  </div>
+
+                  <h4 class="opp-product-name">{{ opp.productName }}</h4>
+
+                  <div class="opp-pricing">
+                    <div class="current-price">
+                      ${{ opp.price | number:'1.0-0' }}
+                    </div>
+                  </div>
+
+                  <div class="opp-metrics">
+                    <span class="score-badge" [class]="analysis.getValueScoreClass(opp.valueScore)">
+                      Valor de compra: {{ opp.valueScore }}/100
+                    </span>
+                    @if (opp.highlight) {
+                      <span class="metric-pill highlight">{{ opp.highlight }}</span>
+                    }
+                  </div>
+
+                  <div class="opp-actions mt-3">
+                    <button 
+                      type="button" 
+                      class="btn btn-outline btn-sm w-full"
+                      (click)="analyzeProduct(opp.productId)">
+                      Analizar a fondo →
+                    </button>
+                  </div>
+                </article>
+              }
+            </div>
+          </div>
+        }
+      }
+    </div>
+  }
+
+  <!-- PESTAÑA 2: ANÁLISIS DE PRODUCTO -->
+  @if (analysis.activeTab() === 'product') {
+    <div class="tab-content animate-in">
+      <div class="card p-4 mb-6">
+        <label for="prodSearchInput" class="form-label font-bold">Buscar producto en el catálogo para análisis:</label>
+        <div class="flex gap-2">
+          <input 
+            id="prodSearchInput"
+            type="text" 
+            class="form-control" 
+            placeholder="Ej. Leche entera, Huevos AA, Arroz blanco, Aceite vegetal..." 
+            [ngModel]="searchQuery()" 
+            (ngModelChange)="onSearchQueryChange($event)"
+            (keyup.enter)="executeProductSearch()" />
+          <button type="button" class="btn btn-primary" (click)="executeProductSearch()" [disabled]="!searchQuery().trim()">
+            Buscar
+          </button>
+        </div>
+
+        <!-- Resultados de búsqueda rápida -->
+        @if (analysis.productSearchLoading()) {
+          <div class="text-sm text-muted mt-2">Buscando productos...</div>
+        } @else if (analysis.productSearchResults().length > 0) {
+          <div class="search-quick-results mt-3">
+            <div class="text-xs text-muted mb-2 font-bold">Selecciona un producto para analizar:</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+              @for (item of analysis.productSearchResults(); track item.productId) {
+                <div class="result-picker-item" (click)="analyzeProduct(item.productId)">
+                  <div class="font-bold text-sm">{{ item.name }}</div>
+                  <div class="text-xs text-muted flex-between mt-1">
+                    <span>{{ item.brand || 'Genérico' }} · {{ item.presentation || 'Presentación estándar' }}</span>
+                    <span class="text-primary font-bold">Analizar →</span>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+      @if (analysis.productAnalysisLoading()) {
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Calculando comparativas, rendimientos e historial del producto...</p>
+        </div>
+      } @else if (analysis.productAnalysisError()) {
+        <div class="alert alert-danger mb-4">
+          {{ analysis.productAnalysisError() }}
+        </div>
+      } @else if (analysis.selectedProductAnalysis(); as prod) {
+        <div class="product-analysis-view animate-in">
+          <!-- Tarjeta Superior del Producto -->
+          <div class="card p-5 mb-6">
+            <div class="flex-between flex-wrap gap-4">
+              <div>
+                <span class="badge badge-secondary mb-1">{{ prod.category || 'Abarrotes' }}</span>
+                <h2 class="text-2xl font-bold">{{ prod.productName }}</h2>
+                @if (prod.brand) {
+                  <p class="text-sm text-muted">Marca: <strong>{{ prod.brand }}</strong></p>
+                }
+              </div>
+              <div class="score-box text-right">
+                <div class="text-xs text-muted mb-1">Valor de compra</div>
+                <span class="score-badge large" [class]="analysis.getValueScoreClass(prod.valueScore)">
+                  {{ prod.valueScore }}/100 · {{ analysis.getValueScoreLabel(prod.valueScore) }}
+                </span>
+                <div class="text-xs text-muted mt-1">Confianza: {{ prod.confidence }} ({{ prod.observationsCount }} observaciones)</div>
+              </div>
+            </div>
+
+            @if (prod.valueExplanation) {
+              <div class="alert alert-info mt-4 mb-0 text-sm">
+                <strong>Evaluación:</strong> {{ prod.valueExplanation }}
+              </div>
+            }
+
+            <!-- 4 Tarjetas de Resumen Clave -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-5">
+              <div class="stat-card">
+                <span class="stat-label">Mejor Precio Actual</span>
+                <span class="stat-value text-success">${{ prod.currentBestPrice | number:'1.0-0' }}</span>
+                <span class="stat-sub">En <strong>{{ prod.cheapestRetailer }}</strong></span>
+              </div>
+
+              <div class="stat-card">
+                <span class="stat-label">Mejor Rendimiento Unitario</span>
+                @if (prod.bestUnitPrice) {
+                  <span class="stat-value text-primary">${{ prod.bestUnitPrice.pricePerBaseUnit | number:'1.0-0' }}</span>
+                  <span class="stat-sub">por {{ prod.bestUnitPrice.baseUnit }} ({{ prod.bestUnitPrice.originalPackage }})</span>
+                } @else {
+                  <span class="stat-value text-muted">-</span>
+                  <span class="stat-sub">Sin unidades estandarizadas</span>
+                }
+              </div>
+
+              <div class="stat-card">
+                <span class="stat-label">Rango Histórico</span>
+                <div class="stat-value text-sm mt-1">
+                  Min: <span class="text-success">${{ prod.minHistoricalPrice ? (prod.minHistoricalPrice | number:'1.0-0') : '-' }}</span><br>
+                  Max: <span class="text-danger">${{ prod.maxHistoricalPrice ? (prod.maxHistoricalPrice | number:'1.0-0') : '-' }}</span>
+                </div>
+                <span class="stat-sub">Promedio: ${{ prod.avgHistoricalPrice ? (prod.avgHistoricalPrice | number:'1.0-0') : '-' }}</span>
+              </div>
+
+              <div class="stat-card">
+                <span class="stat-label">¿Momento de Comprar?</span>
+                <span class="stat-value" [class.text-success]="prod.isGoodTimeToBuy === true" [class.text-warning]="prod.isGoodTimeToBuy !== true">
+                  {{ prod.isGoodTimeToBuy ? 'Buen momento' : 'Momento regular' }}
+                </span>
+                <span class="stat-sub">{{ prod.goodTimeToBuyReason || prod.priceTrend }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comparativa entre Tiendas -->
+          @if (prod.retailerPrices.length > 0) {
+            <div class="card p-5 mb-6">
+              <h3 class="card-title mb-3">Comparativa de precios entre tiendas</h3>
+              <div class="table-responsive">
+                <table class="table comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Cadena</th>
+                      <th>Precio Actual</th>
+                      <th>Precio Regular</th>
+                      <th>Descuento</th>
+                      <th>Diferencia vs Mejor</th>
+                      <th>Ámbito de Precio</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (rPrice of prod.retailerPrices; track rPrice.retailerCode) {
+                      <tr [class.highlight-row]="rPrice.diffVsCheapest === 0">
+                        <td>
+                          <span class="store-badge store-badge-{{ rPrice.retailerCode.toLowerCase() }}">
+                            {{ rPrice.retailerName }}
+                          </span>
+                          @if (rPrice.diffVsCheapest === 0) {
+                            <span class="badge badge-success ml-2">Más Barato</span>
+                          }
+                        </td>
+                        <td class="font-bold">${{ rPrice.price | number:'1.0-0' }}</td>
+                        <td>
+                          @if (rPrice.listPrice && rPrice.listPrice > rPrice.price) {
+                            <span class="text-muted line-through">${{ rPrice.listPrice | number:'1.0-0' }}</span>
+                          } @else {
+                            <span class="text-muted">-</span>
+                          }
+                        </td>
+                        <td>
+                          @if (rPrice.discountPercent && rPrice.discountPercent > 0) {
+                            <span class="badge badge-danger">-{{ rPrice.discountPercent | number:'1.0-0' }}%</span>
+                          } @else {
+                            <span class="text-muted">-</span>
+                          }
+                        </td>
+                        <td [class.text-success]="rPrice.diffVsCheapest === 0" [class.text-danger]="rPrice.diffVsCheapest && rPrice.diffVsCheapest > 0">
+                          @if (rPrice.diffVsCheapest === 0) {
+                            Mejor opción
+                          } @else if (rPrice.diffVsCheapest) {
+                            +${{ rPrice.diffVsCheapest | number:'1.0-0' }}
+                          } @else {
+                            -
+                          }
+                        </td>
+                        <td>
+                          <span class="badge badge-outline">{{ rPrice.priceScope }}</span>
+                        </td>
+                        <td>
+                          <span class="status-indicator" [class.status-fresh]="rPrice.isVerified" [class.status-outdated]="!rPrice.isVerified">
+                            {{ rPrice.isVerified ? 'Confirmado' : 'Estimado' }}
+                          </span>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          }
+
+          <!-- Comparativa de Presentaciones / Tamaños -->
+          @if (prod.presentations.length > 0) {
+            <div class="card p-5 mb-6">
+              <h3 class="card-title mb-3">Comparativa de presentaciones y rendimiento</h3>
+              <p class="text-muted text-sm mb-3">Analiza si las presentaciones más grandes realmente ahorran dinero por unidad de medida.</p>
+              <div class="table-responsive">
+                <table class="table comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Presentación</th>
+                      <th>Empaque</th>
+                      <th>Precio Total</th>
+                      <th>Precio Unitario</th>
+                      <th>Rendimiento / Ahorro</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (pres of prod.presentations; track pres.skuId) {
+                      <tr>
+                        <td class="font-bold">{{ pres.skuName }}</td>
+                        <td>{{ pres.package }}</td>
+                        <td>${{ pres.price | number:'1.0-0' }}</td>
+                        <td class="text-primary font-bold">
+                          @if (pres.unitPrice) {
+                            ${{ pres.unitPrice | number:'1.0-0' }} / {{ pres.unitLabel || 'ud' }}
+                          } @else {
+                            -
+                          }
+                        </td>
+                        <td>
+                          @if (pres.savingsPercentVsCheapestUnit !== null && pres.savingsPercentVsCheapestUnit !== undefined) {
+                            @if (pres.savingsPercentVsCheapestUnit === 0) {
+                              <span class="badge badge-success">Opción más rendidora</span>
+                            } @else if (pres.savingsPercentVsCheapestUnit > 0) {
+                              <span class="badge badge-warning">+{{ pres.savingsPercentVsCheapestUnit | number:'1.0-1' }}% más costoso por unidad</span>
+                            } @else {
+                              <span class="badge badge-success">-{{ -pres.savingsPercentVsCheapestUnit | number:'1.0-1' }}% de ahorro por unidad</span>
+                            }
+                          } @else {
+                            -
+                          }
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="empty-state">
+          <div class="empty-icon" style="margin-bottom: 12px;">
+            <img src="/assets/illustrations/empty-search.svg" alt="" style="width: 120px; height: 120px; max-width: 100%;">
+          </div>
+          <h3>Busca un producto para comenzar</h3>
+          <p class="text-muted">Ingresa un nombre para evaluar su precio unitario, historial y comparar entre todas las cadenas disponibles.</p>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- PESTAÑA 3: ANÁLISIS DE LISTAS -->
+  @if (analysis.activeTab() === 'basket') {
+    <div class="tab-content animate-in">
+      <div class="flex-between flex-wrap gap-3 mb-4">
+        <div>
+          <h2 class="section-title">Análisis integral de tus listas de mercado</h2>
+          <p class="text-muted text-sm">Descubre si conviene comprar en un solo supermercado o dividir la compra para maximizar el ahorro.</p>
+        </div>
+
+        <!-- Selector de lista -->
+        <div class="flex gap-2 align-items-center">
+          <select 
+            class="form-control" 
+            [ngModel]="selectedBasketId()" 
+            (ngModelChange)="onBasketSelect($event)">
+            @for (b of basketFacade.baskets(); track b.id) {
+              <option [value]="b.id">{{ b.name }} ({{ b.items.length || 0 }} productos)</option>
+            }
+          </select>
+          <button 
+            type="button" 
+            class="btn btn-primary btn-sm"
+            (click)="analyzeSelectedBasket()"
+            [disabled]="!selectedBasketId() || analysis.basketAnalysisLoading()">
+            @if (analysis.basketAnalysisLoading()) { Analizando… } @else { Analizar lista }
+          </button>
+        </div>
+      </div>
+
+      @if (analysis.basketAnalysisLoading()) {
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Optimizando lista y evaluando combinaciones de supermercados...</p>
+        </div>
+      } @else if (analysis.basketAnalysisError()) {
+        <div class="alert alert-danger mb-4">
+          {{ analysis.basketAnalysisError() }}
+        </div>
+      } @else if (analysis.basketAnalysis(); as bAnalysis) {
+        <div class="basket-analysis-dashboard animate-in">
+          <!-- 3 Tarjetas de Resumen -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="card p-4">
+              <span class="text-xs text-muted">Productos analizados</span>
+              <div class="text-2xl font-bold">{{ bAnalysis.totalItems }} productos</div>
+              <span class="text-xs text-muted">En la lista seleccionada</span>
+            </div>
+
+            <div class="card p-4 border-primary">
+              <span class="text-xs text-primary font-bold">Total estimado de compra</span>
+              <div class="text-2xl font-bold text-primary">
+                ${{ bAnalysis.estimatedTotal | number:'1.0-0' }}
+              </div>
+              <span class="text-xs text-muted">Suma total de los mejores precios</span>
+            </div>
+
+            <div class="card p-4 border-success">
+              <span class="text-xs text-success font-bold">Ahorro potencial total</span>
+              <div class="text-2xl font-bold text-success">
+                ${{ bAnalysis.potentialSavings | number:'1.0-0' }}
+              </div>
+              <span class="text-xs text-muted">Comprando en las opciones recomendadas</span>
+            </div>
+          </div>
+
+          <!-- Recomendaciones Globales -->
+          @if (bAnalysis.recommendations.length > 0) {
+            <div class="card p-5 mb-6">
+              <h3 class="card-title mb-3">Recomendaciones estratégicas</h3>
+              <ul class="bullet-list">
+                @for (rec of bAnalysis.recommendations; track rec) {
+                  <li class="mb-2"><strong>✓</strong> {{ rec }}</li>
+                }
+              </ul>
+            </div>
+          }
+
+          <!-- Desglose de Productos en la Lista -->
+          @if (bAnalysis.itemBreakdowns.length > 0) {
+            <div class="card p-5 mb-6">
+              <h3 class="card-title mb-3">Desglose y sugerencias por producto</h3>
+              <div class="table-responsive">
+                <table class="table comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Búsqueda en Lista</th>
+                      <th>Producto Seleccionado</th>
+                      <th>Mejor Precio</th>
+                      <th>Valor de compra</th>
+                      <th>Sugerencia de Ahorro</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (item of bAnalysis.itemBreakdowns; track item.itemId) {
+                      <tr>
+                        <td class="font-bold">{{ item.query }}</td>
+                        <td>{{ item.selectedProductName || 'Sin coincidencia' }}</td>
+                        <td class="font-bold">
+                          @if (item.price) {
+                            ${{ item.price | number:'1.0-0' }}
+                          } @else {
+                            -
+                          }
+                        </td>
+                        <td>
+                          @if (item.valueScore) {
+                            <span class="score-badge" [class]="analysis.getValueScoreClass(item.valueScore)">
+                              Valor de compra: {{ item.valueScore }}/100
+                            </span>
+                          } @else {
+                            -
+                          }
+                        </td>
+                        <td>
+                          @if (item.suggestion) {
+                            <span class="text-success text-sm font-bold">{{ item.suggestion }}</span>
+                          } @else {
+                            <span class="text-muted text-sm">Opción óptima</span>
+                          }
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="empty-state">
+          <div class="empty-icon" style="margin-bottom: 12px;">
+            <img src="/assets/illustrations/empty-lists.svg" alt="" style="width: 120px; height: 120px; max-width: 100%;">
+          </div>
+          <h3>Selecciona una lista para analizar</h3>
+          <p class="text-muted">Elige una de tus listas de mercado para calcular ahorros potenciales, recomendaciones y optimización.</p>
+        </div>
+      }
+    </div>
+  }
+</section>

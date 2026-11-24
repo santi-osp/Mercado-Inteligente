@@ -1,0 +1,39 @@
+# Build & Compilation Artifacts
+**/bin/
+**/obj/
+**/dist/
+**/release/
+**/artifacts/
+**/temp_pack_v1/
+**/release-evidence/
+**/node_modules/
+**/.angular/
+**/.vs/
+.serena/
+TestResults/
+**/TestResults/
+
+# Binary & Archives
+*.exe
+*.lnk
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+-C
+
+# Database & Local Storage
+*.db
+*.db-shm
+*.db-wal
+*.db.gz
+*.log
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+secrets/
+*.user
+*.suo

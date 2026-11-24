@@ -1,0 +1,3 @@
+# ADR 0002 — Contexto, cobertura y fallbacks
+
+El diagnóstico ratifica que D1 muestra precios de región/fulfillment, no góndola física. Éxito separa seller comercial de fulfillment y excluye marketplace por defecto. Ara tiene cobertura parcial y no se debe automatizar el catálogo completo desde la aplicación restringida. El estado UNKNOWN de stock no autoriza declarar disponibilidad. Google sin credencial implica distancia estimada, nunca ruta vial; OpenRouter sin credencial no participa en el camino crítico. Estas reglas deben probarse antes de considerar completa cualquier fase de integración.

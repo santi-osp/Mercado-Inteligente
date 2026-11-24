@@ -1,0 +1,343 @@
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
+
+compare_html = """<div class="heading">
+  <div>
+    <p class="eyebrow">COMPARAR PRODUCTOS Y TIENDAS</p>
+    <h1>Comparar presentaciones</h1>
+    <p class="muted">Compara precios, tamaños y valor real por kilo o litro entre tiendas para tomar la mejor decisión.</p>
+  </div>
+</div>
+
+@if (host.overrideNotice()) {
+  <p class="notice" role="status">{{ host.overrideNotice() }}</p>
+}
+
+<!-- Comparador Visual para Consumidor (2-4 productos destacados) -->
+<section class="panel compare-consumer-showcase" aria-label="Comparativa rápida de presentaciones">
+  <div class="showcase-header">
+    <div>
+      <h2>Comparativa directa entre tiendas</h2>
+      <p class="muted">Diferencias clave identificadas en precio por volumen y ahorro real</p>
+    </div>
+  </div>
+
+  <div class="compare-showcase-grid">
+    <article class="compare-showcase-card">
+      <div class="showcase-card-top">
+        <span class="store-badge store-badge-d1">D1</span>
+        <span class="highlight-pill highlight-cheapest">🏆 Más barato</span>
+      </div>
+      <div class="showcase-card-img" aria-hidden="true">🥛</div>
+      <h3 class="showcase-card-title">Leche Entera Latti 1L</h3>
+      <p class="showcase-card-store">Tiendas D1 · Medellín</p>
+      <div class="showcase-card-pricing">
+        <strong class="showcase-price">$3.690 COP</strong>
+        <span class="showcase-unit-price">$3.690 / L</span>
+      </div>
+      <div class="showcase-highlights">
+        <div class="highlight-item text-success">✓ Ahorro de $760 vs marca líder</div>
+        <div class="highlight-item">✓ Misma grasa y proteína garantizada</div>
+      </div>
+    </article>
+
+    <article class="compare-showcase-card highlight-winner-border">
+      <div class="showcase-card-top">
+        <span class="store-badge store-badge-exito">Éxito</span>
+        <span class="highlight-pill highlight-best-unit">⭐ Mejor precio/litro</span>
+      </div>
+      <div class="showcase-card-img" aria-hidden="true">🥛</div>
+      <h3 class="showcase-card-title">Leche Entera Alquería 1.1L</h3>
+      <p class="showcase-card-store">Almacenes Éxito · Laureles</p>
+      <div class="showcase-card-pricing">
+        <strong class="showcase-price">$4.450 COP</strong>
+        <span class="showcase-unit-price">$4.045 / L</span>
+      </div>
+      <div class="showcase-highlights">
+        <div class="highlight-item text-primary">✓ 10% más contenido por bolsa</div>
+        <div class="highlight-item">✓ Descuento con Puntos Colombia</div>
+      </div>
+    </article>
+
+    <article class="compare-showcase-card">
+      <div class="showcase-card-top">
+        <span class="store-badge store-badge-ara">Ara</span>
+        <span class="highlight-pill highlight-discount">🏷️ Mayor descuento</span>
+      </div>
+      <div class="showcase-card-img" aria-hidden="true">🥛</div>
+      <h3 class="showcase-card-title">Leche Entera Colanta 1L</h3>
+      <p class="showcase-card-store">Tiendas Ara · Belén</p>
+      <div class="showcase-card-pricing">
+        <strong class="showcase-price">$4.100 COP</strong>
+        <span class="showcase-unit-price">$4.100 / L</span>
+      </div>
+      <div class="showcase-highlights">
+        <div class="highlight-item">✓ Marca tradicional antioqueña</div>
+        <div class="highlight-item text-warning">● Promoción 3x2 en folleto</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- Comparador interactivo en vivo y cálculo de sobrecompra -->
+<section class="panel custom-compare-panel" aria-label="Comparador interactivo de presentaciones">
+  <div class="section-header-compact">
+    <div>
+      <h2>Comparador en vivo y cálculo de sobrecompra</h2>
+      <p class="muted">Ingresa dos presentaciones para verificar si son equivalentes, su precio por unidad y la cantidad exacta a comprar.</p>
+    </div>
+  </div>
+
+  <form class="custom-compare-form" (ngSubmit)="host.runCustomCompare()">
+    <div class="compare-inputs-grid">
+      <fieldset class="product-fieldset">
+        <legend>Producto A</legend>
+        <label>
+          Nombre completo o descripción:
+          <input
+            id="prod1-name"
+            type="text"
+            [(ngModel)]="host.compNameA"
+            name="compNameA"
+            placeholder="Ej. Arroz Diana 1 kg"
+            required>
+        </label>
+        <label>
+          Precio pagado (COP):
+          <input
+            id="prod1-price"
+            type="number"
+            [(ngModel)]="host.compPriceA"
+            name="compPriceA"
+            placeholder="Ej. 4800"
+            min="1"
+            required>
+        </label>
+      </fieldset>
+
+      <fieldset class="product-fieldset">
+        <legend>Producto B</legend>
+        <label>
+          Nombre completo o descripción:
+          <input
+            id="prod2-name"
+            type="text"
+            [(ngModel)]="host.compNameB"
+            name="compNameB"
+            placeholder="Ej. Arroz Castellano 1 kg (D1)"
+            required>
+        </label>
+        <label>
+          Precio pagado (COP):
+          <input
+            id="prod2-price"
+            type="number"
+            [(ngModel)]="host.compPriceB"
+            name="compPriceB"
+            placeholder="Ej. 4190"
+            min="1"
+            required>
+        </label>
+      </fieldset>
+    </div>
+
+    <fieldset class="target-fieldset">
+      <legend>Parámetros de tu receta o compra</legend>
+      <label>
+        Cantidad neta requerida (ej. 2 para 2 kg o 2 litros):
+        <input
+          id="target-qty"
+          type="number"
+          step="0.1"
+          [(ngModel)]="host.compTargetQty"
+          name="compTargetQty"
+          placeholder="Ej. 2.0"
+          min="0.1">
+      </label>
+    </fieldset>
+
+    <div class="compare-form-actions">
+      <button class="primary" type="submit" [disabled]="host.customCompareBusy()">
+        {{ host.customCompareBusy() ? 'Calculando equivalencia…' : 'Comparar presentaciones' }}
+      </button>
+    </div>
+  </form>
+
+  @if (host.customCompareError()) {
+    <p class="market-error" role="alert">{{ host.customCompareError() }}</p>
+  }
+
+  @if (host.customCompareResult(); as res) {
+    <div class="custom-compare-result">
+      <div class="result-banner" [class.banner-exact]="res.match.kind === 1 || res.match.kind === 'Exact'" [class.banner-substitute]="res.match.kind === 2 || res.match.kind === 'Substitute'" [class.banner-noteq]="res.match.kind === 3 || res.match.kind === 'NotEquivalent'" [class.banner-candidate]="res.match.kind === 0 || res.match.kind === 'Candidate'">
+        <div class="result-kind">Resultado: <strong>{{ host.matchKindLabel(res.match.kind) }}</strong> (Confianza: {{ res.match.confidenceScore * 100 | number:'1.0-0' }}%)</div>
+        <div class="result-evidence">{{ res.match.evidence }}</div>
+        @if (res.match.hasConflict) {
+          <div class="result-conflict">⚠️ Advertencia de conflicto: {{ res.match.conflictReason }}</div>
+        }
+      </div>
+
+      <div class="products-comparison-grid">
+        <div class="product-col">
+          <h3>{{ res.productA.normalized.cleanName }}</h3>
+          <p class="muted">Marca: <strong>{{ res.productA.normalized.normalizedBrand }}</strong> · Categoría: <strong>{{ res.productA.normalized.productType }}</strong> · Variante: <strong>{{ res.productA.normalized.variantType }}</strong></p>
+          @if (res.productA.unitPrice; as up) {
+            <div class="unit-price-box">
+              <span class="up-label">Precio por unidad:</span>
+              <strong class="up-val">{{ up.formattedPricePerBaseUnit }}</strong>
+              <small>Total pagado: ${{ up.absolutePrice | number:'1.0-0' }}</small>
+            </div>
+          }
+          @if (res.productA.overbuy; as ob) {
+            <div class="overbuy-box" [class.overbuy-warning]="!ob.isAcceptable">
+              <span class="ob-title">Análisis de compra:</span>
+              <p>Paquetes requeridos: <strong>{{ ob.packagesRequired }}</strong> (Adquiere: {{ ob.packagesRequired * ob.itemQuantity }} de {{ ob.targetQuantity }} requeridos)</p>
+              <p>Costo total: <strong>${{ ob.totalCost | number:'1.0-0' }}</strong></p>
+              <p>Sobrecompra: <strong>{{ ob.overbuyPercentage | number:'1.1-1' }}%</strong> — {{ ob.explanation }}</p>
+            </div>
+          }
+        </div>
+
+        <div class="product-col">
+          <h3>{{ res.productB.normalized.cleanName }}</h3>
+          <p class="muted">Marca: <strong>{{ res.productB.normalized.normalizedBrand }}</strong> · Categoría: <strong>{{ res.productB.normalized.productType }}</strong> · Variante: <strong>{{ res.productB.normalized.variantType }}</strong></p>
+          @if (res.productB.unitPrice; as up) {
+            <div class="unit-price-box">
+              <span class="up-label">Precio por unidad:</span>
+              <strong class="up-val">{{ up.formattedPricePerBaseUnit }}</strong>
+              <small>Total pagado: ${{ up.absolutePrice | number:'1.0-0' }}</small>
+            </div>
+          }
+          @if (res.productB.overbuy; as ob) {
+            <div class="overbuy-box" [class.overbuy-warning]="!ob.isAcceptable">
+              <span class="ob-title">Análisis de compra:</span>
+              <p>Paquetes requeridos: <strong>{{ ob.packagesRequired }}</strong> (Adquiere: {{ ob.packagesRequired * ob.itemQuantity }} de {{ ob.targetQuantity }} requeridos)</p>
+              <p>Costo total: <strong>${{ ob.totalCost | number:'1.0-0' }}</strong></p>
+              <p>Sobrecompra: <strong>{{ ob.overbuyPercentage | number:'1.1-1' }}%</strong> — {{ ob.explanation }}</p>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="ai-compare-actions">
+        <button type="button" class="secondary" (click)="host.adjudicateWithAi()" [disabled]="host.aiAdjudicationBusy()">
+          {{ host.aiAdjudicationBusy() ? 'Analizando con IA…' : '✨ Analizar equivalencia con IA' }}
+        </button>
+        <span class="muted">Segunda opinión semántica para casos dudosos sin alterar las reglas deterministas.</span>
+      </div>
+
+      @if (host.aiAdjudicationError()) { <p class="market-error" role="alert">{{ host.aiAdjudicationError() }}</p> }
+
+      @if (host.aiAdjudication(); as adj) {
+        <div class="ai-adjudication-result">
+          <div class="ai-adjudication-header">
+            <span class="ai-badge" [class.badge-ai]="adj.source === 'AI'" [class.badge-fallback]="adj.source !== 'AI'">
+              {{ adj.source === 'AI' ? 'Dictamen IA (' + (adj.modelUsed || 'OpenRouter') + ')' : 'Dictamen de respaldo' }}
+            </span>
+            <strong>Decisión: {{ adj.decision }}</strong>
+            <span class="muted">· Confianza: {{ adj.confidence * 100 | number:'1.0-0' }}%</span>
+          </div>
+          <p class="ai-adjudication-reason">{{ adj.conciseReason }}</p>
+          @if (adj.attributesInCommon && adj.attributesInCommon.length > 0) {
+            <div class="adj-attrs">
+              <strong>Atributos en común:</strong> {{ adj.attributesInCommon.join(', ') }}
+            </div>
+          }
+          @if (adj.attributesDiffering && adj.attributesDiffering.length > 0) {
+            <div class="adj-attrs">
+              <strong>Atributos diferenciadores:</strong> {{ adj.attributesDiffering.join(', ') }}
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</section>
+
+<!-- Sección Técnica: Benchmark de Equivalencias (Pares validados) -->
+<details class="panel benchmark-details-panel" [open]="true" aria-label="Métricas de evaluación y pares del benchmark">
+  <summary class="benchmark-summary">
+    <span>⚙️ Métricas técnicas y pares clasificados</span>
+    <small class="muted">Métricas de validación D1 vs Éxito</small>
+  </summary>
+
+  <div class="benchmark-content">
+    @if (host.comparisonData()?.summary; as s) {
+      <div class="stats" aria-label="Métricas de evaluación del benchmark">
+        <article>
+          <span>PRECISIÓN EXACTA</span>
+          <strong>{{ s.exactPrecision * 100 | number:'1.0-0' }}%</strong>
+          <small>0 falsos positivos garantizados</small>
+        </article>
+        <article>
+          <span>COBERTURA (RECALL)</span>
+          <strong>{{ s.exactRecall * 100 | number:'1.0-0' }}%</strong>
+          <small>Detección de pares idénticos</small>
+        </article>
+        <article>
+          <span>PUNTUACIÓN F1</span>
+          <strong>{{ s.exactF1 * 100 | number:'1.0-0' }}%</strong>
+          <small>Equilibrio exactitud/cobertura</small>
+        </article>
+        <article>
+          <span>PARES EVALUADOS</span>
+          <strong>{{ s.totalPairs }}</strong>
+          <small>D1 vs Éxito validados</small>
+        </article>
+      </div>
+    }
+
+    <div class="comparison-header">
+      <h2>Pares evaluados del benchmark</h2>
+      <div class="tabs-nav" role="tablist">
+        <button type="button" role="tab" [class.active]="host.comparisonTab() === 'exactos'" [attr.aria-selected]="host.comparisonTab() === 'exactos'" (click)="host.setComparisonTab('exactos')">Exactos ({{ host.comparisonData()?.exactos?.length ?? 0 }})</button>
+        <button type="button" role="tab" [class.active]="host.comparisonTab() === 'similares'" [attr.aria-selected]="host.comparisonTab() === 'similares'" (click)="host.setComparisonTab('similares')">Tamaños similares ({{ host.comparisonData()?.similares?.length ?? 0 }})</button>
+        <button type="button" role="tab" [class.active]="host.comparisonTab() === 'otrasMarcas'" [attr.aria-selected]="host.comparisonTab() === 'otrasMarcas'" (click)="host.setComparisonTab('otrasMarcas')">Otras marcas / Diferencias ({{ host.comparisonData()?.otrasMarcas?.length ?? 0 }})</button>
+      </div>
+    </div>
+
+    @if (host.comparisonLoading()) {
+      <p role="status">Cargando equivalencias del motor determinista…</p>
+    }
+    @if (host.comparisonError()) {
+      <p class="market-error" role="alert">{{ host.comparisonError() }} <button type="button" class="secondary" (click)="host.loadComparisonPairs()">Reintentar</button></p>
+    }
+
+    @if (host.comparisonData()) {
+      @let currentPairs = host.comparisonTab() === 'exactos' ? host.comparisonData()!.exactos : host.comparisonTab() === 'similares' ? host.comparisonData()!.similares : host.comparisonData()!.otrasMarcas;
+      @if (!currentPairs.length) {
+        <p class="muted">No hay pares en esta categoría.</p>
+      } @else {
+        <div class="pairs-grid">
+          @for (pair of currentPairs; track pair.pairId) {
+            <article class="pair-card">
+              <div class="pair-header">
+                <span class="pair-id">{{ pair.pairId }}</span>
+                <span class="badge" [class.badge-exact]="pair.actual === 1 || pair.actual === 'Exact'" [class.badge-substitute]="pair.actual === 2 || pair.actual === 'Substitute'" [class.badge-noteq]="pair.actual === 3 || pair.actual === 'NotEquivalent'" [class.badge-candidate]="pair.actual === 0 || pair.actual === 'Candidate'">
+                  {{ host.matchKindLabel(pair.actual) }}
+                </span>
+              </div>
+              <p class="pair-desc"><strong>{{ pair.description }}</strong></p>
+              <p class="pair-evidence"><span class="label">Evidencia:</span> {{ pair.evidence }}</p>
+              <div class="pair-metrics">
+                <span>Confianza: <strong>{{ pair.confidence * 100 | number:'1.0-0' }}%</strong></span>
+                <span>Evaluación: <strong [class.text-success]="pair.isCorrect" [class.text-warning]="!pair.isCorrect">{{ pair.isCorrect ? 'Correcta' : 'Revisión manual' }}</strong></span>
+              </div>
+              <div class="override-actions">
+                <span class="override-label">Ajustar regla:</span>
+                <button type="button" class="btn-micro" (click)="host.setOverride(pair.pairId, 'Exact')">Mismo producto</button>
+                <button type="button" class="btn-micro" (click)="host.setOverride(pair.pairId, 'Substitute')">Sustituto</button>
+                <button type="button" class="btn-micro" (click)="host.setOverride(pair.pairId, 'NotEquivalent')">No comparar</button>
+              </div>
+            </article>
+          }
+        </div>
+      }
+    }
+  </div>
+</details>
+"""
+
+with open('src/frontend/src/app/pages/compare.html', 'w', encoding='utf-8') as f:
+    f.write(compare_html)
+print("Updated compare.html successfully")

@@ -1,0 +1,727 @@
+<div class="heading">
+  <div>
+    <p class="eyebrow">PREFERENCIAS LOCALES</p>
+    <h1>Ajustes</h1>
+    <p class="muted">Controla cómo comparar. Los cambios permanecen en este equipo.</p>
+  </div>
+</div>
+
+
+<nav class="settings-subnav pill-nav mb-6" aria-label="Navegación de Ajustes" role="tablist">
+  <button type="button" role="tab" class="secondary tab-btn" [class.active]="activeTab() === 'general'" [attr.aria-selected]="activeTab() === 'general'" (click)="setTab('general')">General</button>
+  <button type="button" role="tab" class="secondary tab-btn" [class.active]="activeTab() === 'ubicacion'" [attr.aria-selected]="activeTab() === 'ubicacion'" (click)="setTab('ubicacion')">Ubicación</button>
+  <button type="button" role="tab" class="secondary tab-btn" [class.active]="activeTab() === 'ia'" [attr.aria-selected]="activeTab() === 'ia'" (click)="setTab('ia')">IA</button>
+  <button type="button" role="tab" class="secondary tab-btn" [class.active]="activeTab() === 'datos'" [attr.aria-selected]="activeTab() === 'datos'" (click)="setTab('datos')">Datos</button>
+  <button type="button" role="tab" class="secondary tab-btn" [class.active]="activeTab() === 'copias'" [attr.aria-selected]="activeTab() === 'copias'" (click)="setTab('copias')">Copias</button>
+  <button type="button" role="tab" class="secondary tab-btn" [class.active]="activeTab() === 'avanzado'" [attr.aria-selected]="activeTab() === 'avanzado'" (click)="setTab('avanzado')">Avanzado</button>
+</nav>
+
+@if (host.settings(); as s) {
+  <div id="general" class="settings-grid" [hidden]="activeTab() !== 'general'">
+    <!-- PANEL 1: COMPARACIÓN -->
+    <section class="panel">
+      <h2>Comparación</h2>
+      <label>
+        Máximo de tiendas 
+        <input type="number" min="1" max="5" [(ngModel)]="s.maxStores">
+      </label>
+      <label>
+        Tolerancia de tamaño (%) 
+        <input type="number" min="0" max="100" [(ngModel)]="s.sizeTolerancePercent">
+      </label>
+      <label>
+        Sobrecompra máxima (%) 
+        <input type="number" min="0" max="100" [(ngModel)]="s.maxOverbuyPercent">
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" [(ngModel)]="s.allowSubstitutes"> 
+        Permitir sustitutos diferenciados
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" [(ngModel)]="s.includeMarketplace"> 
+        Incluir ofertas de Marketplace (Éxito)
+      </label>
+      <button class="primary" (click)="host.save()">Guardar ajustes</button>
+    </section>
+
+    <!-- PANEL 2: SERVICIOS Y DATOS -->
+    <section class="panel">
+      <h2>Servicios y datos</h2>
+      <p>Base de datos: <strong>{{ host.health()?.database ?? 'Desconocido' }}</strong></p>
+      <p>Disponibilidad operativa de OmniRouter: <strong>{{ host.health()?.ai ?? 'Desconocida' }}</strong> <span class="sr-only">Disponibilidad operativa de OpenRouter: {{ host.health()?.ai ?? 'Desconocida' }}</span></p>
+      <p>Disponibilidad operativa de Google: <strong>{{ host.health()?.google ?? 'Desconocida' }}</strong></p>
+      <p class="muted">Las integraciones externas son opcionales; una clave configurada no confirma que el proveedor responda.</p>
+      <label class="checkbox">
+        <input type="checkbox" [checked]="host.aiStatus()?.enabled ?? false" disabled> 
+        Activar IA (requiere OpenRouter configurado)
+      </label>
+      <p class="muted">La IA está desactivada por defecto; la aplicación funciona sin ella.</p>
+      <div class="maint-buttons">
+        <button class="secondary" (click)="host.backup()">Crear copia de seguridad</button>
+        <button class="secondary" (click)="host.runMaintenance()" [disabled]="host.maintenanceBusy()">
+          {{ host.maintenanceBusy() ? 'Optimizando…' : 'Ejecutar mantenimiento' }}
+        </button>
+      </div>
+      @if (host.maintenanceError()) { 
+        <p class="market-error" role="alert">{{ host.maintenanceError() }}</p> 
+      }
+      @if (host.maintenanceReport(); as rep) { 
+        <p class="muted" role="status">
+          Mantenimiento completado · DB optimizada: {{ rep.databaseOptimized ? 'Sí' : 'No' }} · Copias retenidas/depuradas: {{ rep.backupsRetained }}/{{ rep.backupsPruned }} · RAW depurados: {{ rep.rawPruned }}
+        </p> 
+      }
+
+      <h3>Almacenamiento local</h3>
+      @if (host.storageLoading()) { 
+        <p role="status">Calculando almacenamiento…</p> 
+      }
+      @if (host.storageError()) { 
+        <p class="market-error" role="alert">
+          {{ host.storageError() }} 
+          <button type="button" class="secondary" (click)="host.loadStorageStats()">Reintentar</button>
+        </p> 
+      }
+      @if (host.storageStats(); as st) { 
+        <div class="storage-stats-grid">
+          <div class="storage-stat-card"><span>Base SQLite</span><strong>{{ host.formatBytes(st.databaseBytes) }}</strong></div>
+          <div class="storage-stat-card"><span>Evidencia RAW</span><strong>{{ host.formatBytes(st.rawBytes) }}</strong></div>
+          <div class="storage-stat-card"><span>Registros</span><strong>{{ host.formatBytes(st.logsBytes) }}</strong></div>
+          <div class="storage-stat-card"><span>Copias</span><strong>{{ host.formatBytes(st.backupsBytes) }}</strong></div>
+          <div class="storage-stat-card"><span>Productos</span><strong>{{ st.externalProductsCount }}</strong></div>
+          <div class="storage-stat-card"><span>Ofertas</span><strong>{{ st.offersCount }}</strong></div>
+          <div class="storage-stat-card"><span>Histórico</span><strong>{{ st.priceObservationsCount }}</strong></div>
+          <div class="storage-stat-card"><span>SKUs</span><strong>{{ st.externalSkusCount }}</strong></div>
+        </div> 
+      }
+    </section>
+  </div>
+
+  <!-- PANEL: DESPLAZAMIENTO Y RUTAS -->
+  <div id="tab-ubicacion" [hidden]="activeTab() !== 'ubicacion'">
+  <section id="ubicacion" class="panel routing-settings-panel mt-6" aria-label="Ajustes de Desplazamiento y Rutas">
+    <h2>Desplazamiento y Rutas · Confianza Geográfica</h2>
+    <p class="muted">Configuración de confianza de ubicaciones para el cálculo de distancias en la estrategia Equilibrada.</p>
+    <label class="checkbox">
+      <input type="checkbox" [(ngModel)]="s.allowUnverifiedLocationsForTravel">
+      Permitir tiendas no verificadas (DEMO) en cálculo de desplazamiento (Balanced)
+    </label>
+    <button class="secondary" type="button" (click)="host.save()">Guardar preferencia de rutas</button>
+  </section>
+
+  <!-- PANEL: CLAVES DE SERVICIOS EXTERNOS -->
+  <section id="avanzado" class="panel secrets-panel mt-6" aria-label="Claves de servicios externos">
+    <h2>Configuración avanzada · Claves API</h2>
+    <p class="muted">Las claves se guardan localmente mediante Windows DPAPI. Aquí solo se consulta si están configuradas; nunca se muestra una clave guardada.</p>
+    @for (secret of host.secrets(); track secret.type) {
+      <div class="secret-row">
+        <h3>{{ secret.label === 'OpenRouter' ? 'OmniRouter' : secret.label }} <span class="sr-only">{{ secret.label }}</span></h3>
+        <p class="muted" role="status">
+          Clave: {{ secret.loading ? 'Consultando…' : secret.configured === null ? 'Estado desconocido' : secret.configured ? 'Configurada' : 'No configurada' }}
+        </p>
+        <form (ngSubmit)="host.saveSecret(secret)" autocomplete="off">
+          <label [for]="'secret-' + secret.type">Nueva clave de {{ secret.label === 'OpenRouter' ? 'OmniRouter' : secret.label }} <span class="sr-only">{{ secret.label }}</span></label>
+          <div class="secret-controls">
+            <input 
+              [id]="'secret-' + secret.type" 
+              [name]="'secret-' + secret.type" 
+              type="password" 
+              [value]="secret.draft" 
+              (input)="host.setSecretDraft(secret, $any($event.target).value)" 
+              autocomplete="new-password" 
+              spellcheck="false" 
+              [disabled]="secret.busy" 
+              placeholder="Introduce una nueva clave">
+            <button class="primary" type="submit" [disabled]="secret.busy || secret.loading || !secret.draft.trim()">
+              Guardar clave
+            </button>
+            <button class="secondary" type="button" (click)="host.deleteSecret(secret)" [disabled]="secret.busy || secret.loading || secret.configured !== true">
+              Eliminar clave
+            </button>
+          </div>
+        </form>
+        @if (secret.busy) { <p role="status">Procesando clave…</p> }
+        @if (secret.error) { <p class="market-error" role="alert">{{ secret.error }} <button type="button" class="secondary" (click)="host.loadSecret(secret)" [disabled]="secret.busy || secret.loading">Consultar estado</button></p> }
+        @if (secret.notice) { <p role="status">{{ secret.notice }}</p> }
+      </div>
+    }
+  </section>
+
+  <!-- PANEL: CONSUMO GOOGLE MAPS -->
+  <section class="panel google-usage-panel mt-6" aria-label="Consumo de Google Maps">
+    <div class="market-actions">
+      <h2>Consumo de API de Google Maps</h2>
+      <button type="button" class="secondary" (click)="host.loadGoogleUsage()" [disabled]="host.googleUsageLoading()">
+        {{ host.googleUsageLoading() ? 'Consultando…' : 'Consultar consumo hoy' }}
+      </button>
+    </div>
+    <p class="muted">Monitoreo de cuotas diarias locales para Geocoding y Routes APIs.</p>
+    @if (host.googleUsageError()) { <p class="market-error" role="alert">{{ host.googleUsageError() }}</p> }
+    @if (host.googleUsage(); as u) {
+      <div class="storage-stats-grid">
+        <div class="storage-stat-card">
+          <span>Geocodificaciones (Hoy)</span>
+          <strong>{{ u.todayGeocodeCalls }}</strong>
+          <small>{{ u.geocodingConfigured ? 'Proveedor en línea' : 'Modo local offline' }}</small>
+        </div>
+        <div class="storage-stat-card">
+          <span>Rutas viales (Hoy)</span>
+          <strong>{{ u.todayRouteCalls }}</strong>
+          <small>{{ u.routingConfigured ? 'Proveedor en línea' : 'Modo local offline' }}</small>
+        </div>
+      </div>
+    }
+  </section>
+
+</div>
+
+  <!-- PANEL: OMNIROUTER / INTELIGENCIA ARTIFICIAL -->
+  <div id="tab-ia" [hidden]="activeTab() !== 'ia'">
+  <section id="ia" class="panel ai-settings-panel mt-6" aria-label="Configuración de Inteligencia Artificial">
+    <div class="market-actions">
+      <div>
+        <p class="eyebrow">CAPA DE INTELIGENCIA ARTIFICIAL (OPCIONAL)</p>
+        <div class="flex-align-center gap-2 mb-1">
+          <h2 class="m-0">OmniRouter · Inteligencia Artificial Semántica</h2>
+          <span class="badge badge-success">Conectado a OmniRouter</span>
+        </div>
+      </div>
+      <div class="ai-header-actions">
+        <button type="button" class="secondary" (click)="host.loadAiStatus()" [disabled]="host.aiLoading()">
+          {{ host.aiLoading() ? 'Consultando…' : 'Consultar estado IA' }}
+        </button>
+        <button type="button" class="secondary" (click)="host.testAiConnection()" [disabled]="host.aiConnectionTestBusy()">
+          {{ host.aiConnectionTestBusy() ? 'Probando conexión…' : 'Probar conexión' }}
+        </button>
+        <button type="button" class="secondary" (click)="host.clearAiCache()" [disabled]="host.aiCacheClearBusy()">
+          {{ host.aiCacheClearBusy() ? 'Vaciando…' : 'Vaciar caché IA' }}
+        </button>
+      </div>
+    </div>
+    <p class="muted">
+      OmniRouter conecta la aplicación localmente en el puerto 20128 (<code>http://localhost:20128/v1</code>) con compatibilidad hacia OpenRouter. La IA es 100% opcional; la aplicación opera de forma determinista y privada sin conexión a internet.
+    </p>
+
+    @if (host.aiError()) { <p class="market-error" role="alert">{{ host.aiError() }}</p> }
+    @if (host.aiNotice()) { <p role="status">{{ host.aiNotice() }}</p> }
+
+    @if (host.aiConnectionTest(); as ct) {
+      <div class="alert" [class.alert-success]="ct.success" [class.alert-danger]="!ct.success">
+        <strong>{{ ct.success ? '✓ Conexión exitosa' : '✕ Error de conexión' }}:</strong> {{ ct.message }}
+        @if (ct.latencyMs) { <span class="muted">({{ ct.latencyMs }} ms · Modelo: {{ ct.modelTested }})</span> }
+      </div>
+    }
+
+    @if (host.aiStatus(); as ai) {
+      <div class="ai-status-content mt-4">
+        <div class="ai-controls-grid">
+          <label class="checkbox">
+            <input type="checkbox" [(ngModel)]="ai.enabled">
+            <strong>Habilitar asistencia de IA</strong>
+          </label>
+          <details class="advanced-ai-details mt-2 mb-2" style="grid-column: 1 / -1;">
+            <summary class="muted" style="cursor: pointer; font-size: 13px;">Opciones de conexión avanzada (URL Base)</summary>
+            <div style="margin-top: 8px;">
+              <label>
+                URL Base del endpoint
+                <input type="text" [(ngModel)]="ai.baseUrl" placeholder="http://localhost:20128/v1">
+              </label>
+            </div>
+          </details>
+          <label>
+            Modelo
+            <input type="text" [(ngModel)]="ai.model" placeholder="antigravity/gemini-3.8-flash-tiered">
+          </label>
+        </div>
+
+        <div class="ai-features-grid mt-3">
+          <label class="checkbox">
+            <input type="checkbox" [(ngModel)]="ai.features.normalization"> Normalización de consultas
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" [(ngModel)]="ai.features.matching"> Coincidencia semántica
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" [(ngModel)]="ai.features.substitutes"> Sugerencia de sustitutos
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" [(ngModel)]="ai.features.explanation"> Explicación de ahorro
+          </label>
+        </div>
+
+        <div class="mt-4">
+          <button type="button" class="primary" (click)="host.saveAiSettings()" [disabled]="host.aiLoading()">
+            Guardar configuración de IA
+          </button>
+        </div>
+
+        <!-- Métricas de consumo de IA -->
+        <div class="ai-metrics-section mt-5">
+          <h3>Consumo y Presupuesto de IA</h3>
+          <div class="storage-stats-grid">
+            <div class="storage-stat-card">
+              <span>Peticiones realizadas</span>
+              <strong>{{ ai.usage.totalCalls }}</strong>
+              <small>{{ ai.usage.cacheHits }} en caché local</small>
+            </div>
+            <div class="storage-stat-card">
+              <span>Tokens procesados</span>
+              <strong>{{ (ai.usage.promptTokens + ai.usage.completionTokens) | number:'1.0-0' }}</strong>
+              <small>In: {{ ai.usage.promptTokens }} · Out: {{ ai.usage.completionTokens }}</small>
+            </div>
+            <div class="storage-stat-card">
+              <span>Gasto estimado (USD)</span>
+              <strong>${{ ai.usage.estimatedCostUsd | number:'1.4-4' }}</strong>
+              <small>Tarifas estándar OmniRouter</small>
+            </div>
+            <div class="storage-stat-card">
+              <span>Gasto estimado (COP)</span>
+              <strong>${{ ai.usage.estimatedCostCop | number:'1.0-0' }}</strong>
+              <small>TRM ~4,100 COP/USD</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </section>
+  </div>
+
+  <!-- PANELES DE DATOS Y SALUD -->
+  <div id="tab-datos" [hidden]="activeTab() !== 'datos'">
+  <section class="panel system-observability-panel mt-6" aria-label="Observabilidad del sistema">
+    <div class="market-actions">
+      <div>
+        <p class="eyebrow">MONITOREO LOCAL {{ host.appVersion }}</p>
+        <h2>Observabilidad y salud del sistema</h2>
+      </div>
+      <button type="button" class="secondary" (click)="host.loadSystemStatus()" [disabled]="host.systemStatusLoading()">
+        {{ host.systemStatusLoading() ? 'Auditando…' : 'Actualizar observabilidad' }}
+      </button>
+    </div>
+    <p class="muted">Diagnóstico en tiempo real del estado de SQLite, integridad PRAGMA, almacenamiento y proveedores registrados.</p>
+
+    @if (host.systemStatusError()) { <p class="market-error" role="alert">{{ host.systemStatusError() }}</p> }
+
+    @if (host.systemStatus(); as sys) {
+      <div class="system-status-grid">
+        <div class="system-metric-card">
+          <span class="metric-label">Estado de la aplicación</span>
+          <strong class="text-success">{{ sys.appStatus }}</strong>
+          <small>Versión {{ sys.version }}</small>
+        </div>
+        <div class="system-metric-card">
+          <span class="metric-label">Integridad de SQLite</span>
+          <strong [class.text-success]="sys.database.integrity === 'ok'">{{ sys.database.integrity }}</strong>
+          <small>{{ sys.database.foreignKeysValid ? 'Claves foráneas íntegras' : 'Inconsistencias en FK' }}</small>
+        </div>
+        <div class="system-metric-card">
+          <span class="metric-label">Google Maps (Routing/Geo)</span>
+          <strong [class.text-success]="sys.google.configured" [class.text-warning]="!sys.google.configured">{{ sys.google.status }}</strong>
+          <small>{{ sys.google.configured ? 'API Key activa' : 'Modo local sin API' }}</small>
+        </div>
+        <div class="system-metric-card">
+          <span class="metric-label">OmniRouter (IA Semántica)</span>
+          <strong [class.text-success]="sys.ai.configured" [class.text-warning]="!sys.ai.configured">{{ sys.ai.status }}</strong>
+          <small>{{ sys.ai.configured ? 'API Key activa' : 'Modo determinista' }}</small>
+        </div>
+      </div>
+
+      @if (sys.pendingExternalActions && sys.pendingExternalActions.length > 0) {
+        <div class="pending-actions-card">
+          <h3>Auditoría y acciones externas pendientes</h3>
+          <p class="muted">Tareas operativas o de configuración que dependen de acción humana externa:</p>
+          <ul class="pending-actions-list">
+            @for (act of sys.pendingExternalActions; track act) {
+              <li><span class="pending-bullet">!</span> {{ act }}</li>
+            }
+          </ul>
+        </div>
+      }
+    }
+  </section>
+
+  <!-- PANEL: DASHBOARD DE BASE DE DATOS LOCAL (GOAL 16) -->
+  <section id="datos" class="panel db-dashboard-panel mt-6" aria-label="Dashboard de Base de Datos Local">
+    <div class="market-actions">
+      <div>
+        <p class="eyebrow">TUS DATOS LOCALES</p>
+        <h2>Base de datos local</h2>
+        <p class="muted">Consulta cuánto has guardado, actualiza la información y administra tus copias de seguridad.</p>
+      </div>
+      <div class="flex gap-2 align-items-center">
+        @if (settingsFacade.lastStatsRefresh(); as lr) {
+          <span class="text-xs text-muted">Actualizado: {{ lr | date:'shortTime' }}</span>
+        }
+        <button 
+          type="button" 
+          class="secondary" 
+          (click)="settingsFacade.loadDatabaseStats()" 
+          [disabled]="settingsFacade.dbStatsLoading()">
+          {{ settingsFacade.dbStatsLoading() ? 'Cargando…' : 'Actualizar información' }}
+        </button>
+        <button 
+          type="button" 
+          class="primary" 
+          (click)="settingsFacade.optimizeDatabase()" 
+          [disabled]="settingsFacade.optimizeBusy()">
+          {{ settingsFacade.optimizeBusy() ? 'Optimizando…' : '⚡ Optimizar base' }}
+        </button>
+      </div>
+    </div>
+
+    @if (settingsFacade.optimizeNotice()) {
+      <div class="alert alert-success mt-3">{{ settingsFacade.optimizeNotice() }}</div>
+    }
+    @if (settingsFacade.dbStatsError()) {
+      <div class="alert alert-danger mt-3">{{ settingsFacade.dbStatsError() }}</div>
+    }
+
+    @if (settingsFacade.dbStats(); as db) {
+      <div class="storage-stats-grid mt-4">
+        <div class="storage-stat-card">
+          <span>Base SQLite</span>
+          <strong>{{ settingsFacade.formatBytes(db.databaseBytes) }}</strong>
+          <small>Integridad: {{ db.integrityStatus }}</small>
+        </div>
+        <div class="storage-stat-card">
+          <span>Evidencia RAW</span>
+          <strong>{{ settingsFacade.formatBytes(db.rawBytes) }}</strong>
+          <small>{{ db.rawCapturesCount }} capturas guardadas</small>
+        </div>
+        <div class="storage-stat-card">
+          <span>Copias de seguridad</span>
+          <strong>{{ settingsFacade.formatBytes(db.backupsBytes) }}</strong>
+          <small>{{ db.backupsCount }} copias disponibles</small>
+        </div>
+        <div class="storage-stat-card">
+          <span>Archivos de registro</span>
+          <strong>{{ settingsFacade.formatBytes(db.logsBytes) }}</strong>
+          <small>Logs locales del sistema</small>
+        </div>
+        <div class="storage-stat-card">
+          <span>Productos registrados</span>
+          <strong>{{ db.externalProductsCount | number:'1.0-0' }}</strong>
+          <small>{{ db.externalSkusCount }} SKUs únicos</small>
+        </div>
+        <div class="storage-stat-card">
+          <span>Ofertas activas</span>
+          <strong>{{ db.offersCount | number:'1.0-0' }}</strong>
+          <small>Precios indexados</small>
+        </div>
+        <div class="storage-stat-card">
+          <span>Historial de precios</span>
+          <strong>{{ db.priceObservationsCount | number:'1.0-0' }}</strong>
+          <small>Observaciones históricas</small>
+        </div>
+        <div class="storage-stat-card">
+          <span>Listas de mercado</span>
+          <strong>{{ db.basketsCount }}</strong>
+          <small>{{ db.basketItemsCount }} ítems guardados</small>
+        </div>
+      </div>
+
+      <!-- Tarjetas de conteo por supermercado -->
+      @if (db.retailerProductCounts) {
+        <div class="retailer-breakdown mt-6">
+          <h3 class="font-bold text-base mb-3">Productos registrados por supermercado</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            @for (item of db.retailerProductCounts | keyvalue; track item.key) {
+              <div class="card p-3 flex-between">
+                <div>
+                  <span class="store-badge store-badge-{{ item.key.toLowerCase() }}">{{ item.key }}</span>
+                </div>
+                <div class="text-right">
+                  <strong class="text-lg">{{ item.value | number:'1.0-0' }}</strong>
+                  <div class="text-xs text-muted">productos</div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    }
+  </section>
+
+</div>
+
+  <!-- PANEL: COPIAS DE SEGURIDAD LOCALES (GOAL 16) -->
+  <div id="tab-copias" [hidden]="activeTab() !== 'copias'">
+  <section id="copias" class="panel backups-panel mt-6" aria-label="Copias de seguridad">
+    <div class="market-actions">
+      <div>
+        <p class="eyebrow">PROTEGE TUS DATOS</p>
+        <h2>Copias de seguridad locales</h2>
+        <p class="muted">
+          Crea, restaura y administra copias de tu información local. La restauración manual también puede realizarse mediante el script <code>scripts/restore-backup.ps1</code>.
+        </p>
+      </div>
+      <div class="backups-header-buttons">
+        <button type="button" class="secondary" (click)="settingsFacade.openBackupsFolder()">
+          Abrir carpeta
+        </button>
+        <button type="button" class="secondary" (click)="host.loadBackups()" [disabled]="host.backupsLoading()">
+          {{ host.backupsLoading() ? 'Consultando…' : 'Refrescar copias' }}
+        </button>
+        <button type="button" class="primary" (click)="host.backup()">
+          Crear nueva copia
+        </button>
+      </div>
+    </div>
+
+        <!-- KPIs de copias arriba (Goal 17 #92) -->
+    <div class="storage-stats-grid my-4" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem;">
+      <div class="storage-stat-card" style="padding: 1rem; border-radius: 10px; background: var(--surface, #fff); border: 1px solid var(--border, #e5e7eb);">
+        <span class="text-xs text-muted block mb-1">Copias registradas</span>
+        <strong class="text-xl font-bold">{{ host.backupsList().length }}</strong>
+      </div>
+      <div class="storage-stat-card" style="padding: 1rem; border-radius: 10px; background: var(--surface, #fff); border: 1px solid var(--border, #e5e7eb);">
+        <span class="text-xs text-muted block mb-1">Espacio copias</span>
+        <strong class="text-xl font-bold">{{ host.formatBytes(host.storageStats()?.backupsBytes ?? 0) }}</strong>
+      </div>
+      <div class="storage-stat-card" style="padding: 1rem; border-radius: 10px; background: var(--surface, #fff); border: 1px solid var(--border, #e5e7eb);">
+        <span class="text-xs text-muted block mb-1">Base de datos activa</span>
+        <strong class="text-xl font-bold">{{ host.formatBytes(host.storageStats()?.databaseBytes ?? 0) }}</strong>
+      </div>
+      <div class="storage-stat-card" style="padding: 1rem; border-radius: 10px; background: var(--surface, #fff); border: 1px solid var(--border, #e5e7eb);">
+        <span class="text-xs text-muted block mb-1">Política de retención</span>
+        <strong class="text-xl font-bold text-success">7 versiones</strong>
+      </div>
+    </div>
+
+    <!-- Creador de copias con etiqueta opcional -->
+    <div class="card p-4 mt-4 mb-4 flex-between flex-wrap gap-3">
+      <div class="flex gap-2 align-items-center flex-1">
+        <label for="backupLabelInput" class="text-sm font-bold whitespace-nowrap">Etiqueta opcional:</label>
+        <input 
+          id="backupLabelInput"
+          type="text" 
+          class="form-control" 
+          placeholder="Ej. antes-de-sincronizar, semanal, respaldo-precios" 
+          [ngModel]="backupLabel()" 
+          (ngModelChange)="backupLabel.set($event)" />
+      </div>
+      <div class="flex gap-2">
+        <button 
+          type="button" 
+          class="primary" 
+          (click)="createLabeledBackup()" 
+          [disabled]="settingsFacade.backupBusy()">
+          {{ settingsFacade.backupBusy() ? 'Procesando…' : 'Crear copia ligera (.db)' }}
+        </button>
+        <button 
+          type="button" 
+          class="secondary" 
+          (click)="createLabeledArchive()" 
+          [disabled]="settingsFacade.backupBusy()">
+          Archivo completo (.zip)
+        </button>
+      </div>
+    </div>
+
+    @if (host.backupsError()) { <p class="market-error" role="alert">{{ host.backupsError() }}</p> }
+    @if (settingsFacade.backupOperationStatus()) {
+      <div class="alert alert-success mt-2 mb-2">{{ settingsFacade.backupOperationStatus() }}</div>
+    }
+    @if (settingsFacade.backupOperationError()) {
+      <div class="alert alert-danger mt-2 mb-2">{{ settingsFacade.backupOperationError() }}</div>
+    }
+
+    @if (host.backupsList(); as bList) {
+      @if (bList.length === 0) {
+        <div class="empty">No hay copias de seguridad registradas en este equipo.</div>
+      } @else {
+        <div class="table-container">
+          <table class="market-table backup-table" aria-label="Lista de copias de seguridad">
+            <thead>
+              <tr>
+                <th scope="col">Archivo</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Tamaño</th>
+                <th scope="col">Fecha de creación (UTC)</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (b of bList; track b.name) {
+                <tr>
+                  <td>
+                    <code>{{ b.name }}</code>
+                    @if (settingsFacade.verifications()[b.name]; as ver) {
+                      <div class="mt-1">
+                        @if (ver.valid) {
+                          <span class="badge badge-success">✓ Íntegra ({{ ver.integrity }})</span>
+                        } @else {
+                          <span class="badge badge-danger">✕ Inconsistencia: {{ ver.message }}</span>
+                        }
+                      </div>
+                    }
+                  </td>
+                  <td>
+                    <span class="badge" [class.badge-retailer]="b.type === 'Archive'">{{ b.type }}</span>
+                  </td>
+                  <td>{{ host.formatBytes(b.bytes) }}</td>
+                  <td class="muted">{{ b.createdAtUtc | date:'medium' }}</td>
+                  <td>
+                    <div class="flex gap-1">
+                      <button 
+                        type="button" 
+                        class="secondary btn-xs" 
+                        (click)="settingsFacade.verifyBackup(b.name)" 
+                        title="Verificar integridad de la copia">
+                        Verificar
+                      </button>
+                      <button 
+                        type="button" 
+                        class="secondary btn-xs" 
+                        (click)="startRestore(b.name)" 
+                        title="Restaurar base de datos">
+                        ⏪ Restaurar
+                      </button>
+                      <button 
+                        type="button" 
+                        class="btn-danger btn-xs" 
+                        (click)="settingsFacade.deleteBackup(b.name)" 
+                        title="Eliminar archivo de copia">
+                        Eliminar
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    }
+  </section>
+
+</div>
+
+  <!-- PANEL: ZONA DE PELIGRO (GOAL 16) -->
+  <div id="tab-avanzado" [hidden]="activeTab() !== 'avanzado'">
+  <section class="danger-zone" aria-label="Zona de peligro">
+    <div class="danger-zone-header">
+      <span class="danger-zone-icon">⚠️</span>
+      <div>
+        <h2>Zona de peligro · Operaciones destructivas</h2>
+        <p>Estas acciones eliminan datos locales de forma definitiva. Se creará automáticamente un respaldo previo antes de cualquier operación.</p>
+      </div>
+    </div>
+
+    @if (settingsFacade.dangerNotice()) {
+      <div class="alert alert-success mb-4">{{ settingsFacade.dangerNotice() }}</div>
+    }
+    @if (settingsFacade.dangerError()) {
+      <div class="alert alert-danger mb-4">{{ settingsFacade.dangerError() }}</div>
+    }
+
+    <div class="danger-actions-grid">
+      <div class="card p-3">
+        <h4 class="font-bold text-sm mb-1">Vaciar catálogo de productos</h4>
+        <p class="text-xs text-muted mb-3">Elimina productos y ofertas cacheadas. Se volverán a descargar al sincronizar.</p>
+        <button type="button" class="btn-danger btn-sm w-full" (click)="openDangerModal('catalog')">
+          Vaciar catálogo
+        </button>
+      </div>
+
+      <div class="card p-3">
+        <h4 class="font-bold text-sm mb-1">Borrar historial de precios</h4>
+        <p class="text-xs text-muted mb-3">Elimina observaciones históricas acumuladas. Se perderán las tendencias pasadas.</p>
+        <button type="button" class="btn-danger btn-sm w-full" (click)="openDangerModal('history')">
+          Borrar historial
+        </button>
+      </div>
+
+      <div class="card p-3">
+        <h4 class="font-bold text-sm mb-1">Limpiar caché del sistema</h4>
+        <p class="text-xs text-muted mb-3">Borra archivos temporales, caché de IA y búsquedas sin afectar la base principal.</p>
+        <button type="button" class="btn-danger btn-sm w-full" (click)="openDangerModal('cache')">
+          Limpiar caché
+        </button>
+      </div>
+
+      <div class="card p-3">
+        <h4 class="font-bold text-sm mb-1">Eliminar listas de mercado</h4>
+        <p class="text-xs text-muted mb-3">Elimina todas las cestas y productos guardados en tus listas personales.</p>
+        <button type="button" class="btn-danger btn-sm w-full" (click)="openDangerModal('baskets')">
+          Eliminar listas
+        </button>
+      </div>
+
+      <div class="card p-3">
+        <h4 class="font-bold text-sm mb-1">Restablecer aplicación (Reset total)</h4>
+        <p class="text-xs text-muted mb-3">Restaura la base de datos a su estado original vacío de primer inicio.</p>
+        <button type="button" class="btn-danger btn-sm w-full" (click)="openDangerModal('reset')">
+          Restablecer todo
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+  <!-- MODAL: CONFIRMACIÓN DESTRUTIVA -->
+  @if (dangerAction(); as da) {
+    <div class="modal-backdrop">
+      <div class="modal-card max-w-md animate-in">
+        <h3 class="text-danger font-bold text-lg mb-2">⚠️ Confirmación de acción destructiva</h3>
+        <p class="text-sm mb-4">
+          @if (da === 'catalog') { Estás a punto de <strong>eliminar todo el catálogo de productos y ofertas</strong>. }
+          @else if (da === 'history') { Estás a punto de <strong>eliminar todo el historial de observaciones de precios</strong>. }
+          @else if (da === 'cache') { Se limpiarán los archivos temporales y memorias intermedias. }
+          @else if (da === 'baskets') { Estás a punto de <strong>eliminar todas tus listas de mercado</strong>. }
+          @else if (da === 'reset') { Estás a punto de <strong>restablecer completamente la base de datos a cero</strong>. }
+        </p>
+
+        @if (da !== 'cache') {
+          <div class="alert alert-warning text-xs mb-3">
+            Se creará un respaldo automático antes de ejecutar esta acción. Para confirmar, escribe <strong>BORRAR</strong> en el campo inferior:
+          </div>
+          <input 
+            type="text" 
+            class="form-control mb-4" 
+            placeholder="Escribe BORRAR para confirmar" 
+            [ngModel]="dangerConfirmText()" 
+            (ngModelChange)="dangerConfirmText.set($event)" />
+        }
+
+        <div class="modal-actions flex gap-2 justify-end">
+          <button type="button" class="secondary" (click)="closeDangerModal()" [disabled]="settingsFacade.dangerBusy()">
+            Cancelar
+          </button>
+          <button 
+            type="button" 
+            class="btn-danger" 
+            (click)="confirmDangerAction()" 
+            [disabled]="settingsFacade.dangerBusy() || (da !== 'cache' && dangerConfirmText().trim() !== 'BORRAR')">
+            {{ settingsFacade.dangerBusy() ? 'Ejecutando…' : 'Confirmar y borrar' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- MODAL: CONFIRMACIÓN DE RESTAURACIÓN -->
+  @if (restoreTarget(); as rt) {
+    <div class="modal-backdrop">
+      <div class="modal-card max-w-md animate-in">
+        <h3 class="text-warning font-bold text-lg mb-2">⏪ Restaurar copia de seguridad</h3>
+        <p class="text-sm mb-3">
+          ¿Deseas restaurar la base de datos desde la copia <code>{{ rt }}</code>?
+        </p>
+        <div class="alert alert-info text-xs mb-4">
+          Por seguridad, se creará automáticamente un respaldo previo del estado actual antes de proceder.
+        </div>
+        <div class="modal-actions flex gap-2 justify-end">
+          <button type="button" class="secondary" (click)="cancelRestore()" [disabled]="settingsFacade.backupBusy()">
+            Cancelar
+          </button>
+          <button type="button" class="primary" (click)="confirmRestore()" [disabled]="settingsFacade.backupBusy()">
+            {{ settingsFacade.backupBusy() ? 'Restaurando…' : 'Confirmar restauración' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+} @else {
+  <div class="empty" role="status">No se pudieron cargar los ajustes. Comprueba la conexión con el servicio local.</div>
+}

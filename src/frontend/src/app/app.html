@@ -1,0 +1,196 @@
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="/assets/brand/logo-primary.png" alt="Mercado Inteligente" class="sidebar-logo">
+    </div>
+    <nav aria-label="Navegación principal">
+      @for (item of nav; track item) {
+        <button type="button" [class.active]="page() === item" [attr.aria-current]="page() === item ? 'page' : null" (click)="navigate(item)"><span class="nav-icon" aria-hidden="true">{{ ['⌂','⌕','▣','⇄','📊','◷','◫','⚙'][$index] }}</span>{{ item === 'Fuentes' ? 'Tiendas' : item }}</button>
+      }
+    </nav>
+    <div class="sidebar-footer"><span class="status-dot"></span> Local · {{ health()?.database === 'ok' ? 'Base local activa' : 'Sin conexión' }}<small>{{ currentAddress() || 'Ubicación no seleccionada' }}</small></div>
+  </aside>
+  <main>
+    <header class="topbar">
+      <div class="mobile-brand">
+        <img src="/assets/brand/mark.svg" alt="" class="mobile-brand-mark">
+        <strong>Mercado Inteligente</strong>
+      </div>
+      <span>◉ {{ currentAddress() || 'Ubicación no seleccionada' }}</span>
+      <span class="pill">{{ health()?.database === 'ok' ? 'Sistema local activo' : 'Sin conexión' }}</span>
+    </header>
+    <div class="content">
+      @if (connectionError()) {
+        <div class="offline-banner" role="alert">
+          <span>Modo sin conexión · Los datos locales permanecen seguros en tu equipo. Las sincronizaciones externas se reanudarán al reconectar.</span>
+        </div>
+      }
+      @if (message()) { <div class="notice" [attr.role]="connectionError() ? 'alert' : 'status'" aria-live="polite">{{ message() }} @if (connectionError()) { <button type="button" class="secondary" (click)="refresh()">Reintentar conexión</button> }</div> }
+      <router-outlet />
+      <footer>Mercado Inteligente · Tus datos permanecen en este equipo</footer>
+
+      <!-- Barra de navegación móvil inferior (5 elementos principales) -->
+      <nav class="mobile-bottom-nav" aria-label="Navegación móvil">
+        <button type="button" class="mobile-nav-item" [class.active]="page() === 'Inicio'" (click)="navigate('Inicio')">
+          <span class="mobile-nav-icon" aria-hidden="true">⌂</span>
+          <span>Inicio</span>
+        </button>
+        <button type="button" class="mobile-nav-item" [class.active]="page() === 'Buscar'" (click)="navigate('Buscar')">
+          <span class="mobile-nav-icon" aria-hidden="true">⌕</span>
+          <span>Buscar</span>
+        </button>
+        <button type="button" class="mobile-nav-item" [class.active]="page() === 'Mi mercado'" (click)="navigate('Mi mercado')">
+          <span class="mobile-nav-icon" aria-hidden="true">▣</span>
+          <span>Mercado</span>
+        </button>
+        <button type="button" class="mobile-nav-item" [class.active]="page() === 'Análisis'" (click)="navigate('Análisis')">
+          <span class="mobile-nav-icon" aria-hidden="true">📊</span>
+          <span>Análisis</span>
+        </button>
+        <button type="button" class="mobile-nav-item" [class.active]="mobileMoreOpen()" (click)="toggleMobileMore()">
+          <span class="mobile-nav-icon" aria-hidden="true">⋯</span>
+          <span>Más</span>
+        </button>
+      </nav>
+
+      <!-- Bottom Sheet para secciones secundarias en móvil -->
+      @if (mobileMoreOpen()) {
+        <div class="mobile-more-backdrop" (click)="closeMobileMore()" aria-hidden="true"></div>
+        <div class="mobile-more-sheet" role="dialog" aria-modal="true" aria-label="Más secciones">
+          <div class="mobile-more-header">
+            <h4 style="margin: 0; font-size: 15px; font-weight: 700;">Más opciones</h4>
+            <button type="button" class="ghost icon-btn" (click)="closeMobileMore()" aria-label="Cerrar">✕</button>
+          </div>
+          <div class="mobile-more-grid">
+            <button type="button" class="mobile-more-btn" (click)="navigate('Comparar')">
+              <span class="mobile-nav-icon" aria-hidden="true">⇄</span>
+              <span>Comparar</span>
+            </button>
+            <button type="button" class="mobile-more-btn" (click)="navigate('Historial')">
+              <span class="mobile-nav-icon" aria-hidden="true">◷</span>
+              <span>Historial</span>
+            </button>
+            <button type="button" class="mobile-more-btn" (click)="navigate('Fuentes')">
+              <span class="mobile-nav-icon" aria-hidden="true">◫</span>
+              <span>Tiendas</span>
+            </button>
+            <button type="button" class="mobile-more-btn" (click)="navigate('Ajustes')">
+              <span class="mobile-nav-icon" aria-hidden="true">⚙</span>
+              <span>Ajustes</span>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </main>
+</div>
+
+<!-- Asistente Flotante (FAB) -->
+<button
+  type="button"
+  id="shopping-assistant-fab"
+  class="shopping-assistant-fab"
+  aria-label="Abrir asistente de compras"
+  (click)="toggleAssistant()"
+  title="Asistente de compras">
+  <span class="assistant-fab-icon" aria-hidden="true">
+    <img src="/assets/icons/assistant-shopping.svg" alt="" class="assistant-fab-icon-img">
+  </span>
+</button>
+
+<!-- Drawer del Asistente -->
+@if (shoppingAssistantFacade.isOpen()) {
+  <div class="assistant-backdrop" (click)="closeAssistant()" aria-hidden="true"></div>
+  <aside
+    id="shopping-assistant-drawer"
+    class="shopping-assistant-drawer"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Asistente de compras">
+    <header class="assistant-drawer-header">
+      <div class="assistant-header-title">
+        <span class="assistant-avatar" aria-hidden="true">
+          <img src="/assets/icons/assistant-shopping.svg" alt="" class="assistant-drawer-icon">
+        </span>
+        <div>
+          <h3>Asistente de compras</h3>
+          <p class="muted">Pregúntame sobre precios, opciones o ahorros</p>
+        </div>
+      </div>
+      <div class="assistant-header-actions">
+        <button type="button" class="ghost icon-btn" (click)="shoppingAssistantFacade.clearHistory()" title="Limpiar historial">🗑</button>
+        <button type="button" class="ghost icon-btn" (click)="closeAssistant()" aria-label="Cerrar asistente">✕</button>
+      </div>
+    </header>
+
+    <div class="assistant-chips" aria-label="Preguntas sugeridas">
+      <button type="button" class="chip-btn" (click)="sendQuickQuestion('¿Cuál producto conviene más?')">¿Cuál conviene más?</button>
+      <button type="button" class="chip-btn" (click)="sendQuickQuestion('¿Dónde ahorro más dinero?')">¿Dónde ahorro?</button>
+      <button type="button" class="chip-btn" (click)="sendQuickQuestion('¿Cuál tiene mejor precio por kilo?')">Mejor precio por kilo</button>
+      <button type="button" class="chip-btn" (click)="sendQuickQuestion('¿Hay una presentación más económica?')">¿Presentación más económica?</button>
+      <button type="button" class="chip-btn" (click)="sendQuickQuestion('¿Qué productos de mi lista están caros?')">¿Qué está caro en mi lista?</button>
+    </div>
+
+    <div class="assistant-messages">
+      @if (!shoppingAssistantFacade.messages().length) {
+        <div class="assistant-welcome">
+          <span class="welcome-icon" aria-hidden="true">
+            <img src="/assets/icons/assistant-shopping.svg" alt="" style="width: 44px; height: 44px;">
+          </span>
+          <h4>¡Hola! Soy tu asistente de compras</h4>
+          <p>Puedo ayudarte a comparar presentaciones, encontrar el mejor precio por kilo o sugerir dónde te rinde más tu presupuesto.</p>
+          <p class="muted small">Tus preguntas se responden con base en los precios reales obtenidos de las tiendas.</p>
+        </div>
+      }
+      @for (msg of shoppingAssistantFacade.messages(); track $index) {
+        <div class="chat-bubble-wrapper" [class.user-wrapper]="msg.sender === 'user'" [class.bot-wrapper]="msg.sender === 'assistant'">
+          <div class="chat-bubble" [class.chat-user]="msg.sender === 'user'" [class.chat-assistant]="msg.sender === 'assistant'">
+            <p>{{ msg.text }}</p>
+            @if (msg.recommendedProducts && msg.recommendedProducts.length > 0) {
+              <div class="assistant-recommendations">
+                <p class="rec-heading">Opciones recomendadas:</p>
+                @for (rec of msg.recommendedProducts; track rec.name + rec.retailer) {
+                  <div class="rec-card">
+                    <div class="rec-info">
+                      <strong>{{ rec.name }}</strong>
+                      <span class="rec-retailer">{{ rec.retailer }}</span>
+                      @if (rec.reason) { <small class="rec-reason">{{ rec.reason }}</small> }
+                    </div>
+                    <div class="rec-pricing">
+                      <span class="rec-price">${{ rec.price | number:'1.0-0' }}</span>
+                    </div>
+                    <div class="rec-actions">
+                      @if (rec.productUrl) {
+                        <a [href]="rec.productUrl" target="_blank" rel="noopener noreferrer" class="secondary small-btn">Ver en tienda ↗</a>
+                      }
+                      <button type="button" class="primary small-btn" (click)="addProductFromSearch(selectedBasketId() || '', { name: rec.name, brand: null, quantity: 1 })">+ Agregar</button>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+      }
+      @if (shoppingAssistantFacade.loading()) {
+        <div class="chat-bubble-wrapper bot-wrapper">
+          <div class="chat-bubble chat-assistant loading-bubble">
+            <span class="typing-dots">Analizando tus opciones…</span>
+          </div>
+        </div>
+      }
+    </div>
+
+    <form class="assistant-input-form" (ngSubmit)="sendAssistantMessage()">
+      <input
+        type="text"
+        [(ngModel)]="assistantInputText"
+        name="assistantQuery"
+        placeholder="Escribe tu consulta…"
+        [disabled]="shoppingAssistantFacade.loading()"
+        autocomplete="off">
+      <button type="submit" class="primary" [disabled]="!assistantInputText.trim() || shoppingAssistantFacade.loading()">Enviar</button>
+    </form>
+  </aside>
+}
+

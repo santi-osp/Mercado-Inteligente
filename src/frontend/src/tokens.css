@@ -1,0 +1,103 @@
+/* ==========================================================================
+   MERCADO INTELIGENTE — DESIGN TOKENS (GOAL 20)
+   Jerarquía Visual, Catálogo Premium & Polish Profesional
+   ========================================================================== */
+
+:root {
+  --color-primary: #167D5A;
+  --color-primary-dark: #0E5E43;
+  --color-primary-soft: #EAF5F0;
+  --color-bg: #F6F7F5;
+  --color-surface: #FFFFFF;
+  --color-surface-secondary: #F1F3F1;
+  --color-border: #E2E6E3;
+  --color-border-strong: #CBD2CD;
+  --color-text: #151A17;
+  --color-text-secondary: #58625C;
+  --color-text-muted: #7C8780;
+  --color-promo: #D94C3D;
+  --radius-control: 10px;
+  --radius-card: 12px;
+  --mi-radius-control: var(--radius-control);
+  --mi-radius-card: var(--radius-card);
+  --mi-radius-full: 999px;
+  /* --- Primary Brand (20% share) --- */
+  --mi-primary: #167D5A;
+  --mi-primary-dark: #0E5E43;
+  --mi-primary-soft: #EAF5F0;
+
+  /* --- Canvas & Surfaces (70% share) --- */
+  --mi-background: #F6F7F5;
+  --mi-surface: #FFFFFF;
+  --mi-surface-secondary: #F1F3F1;
+  --mi-border: #E2E6E3;
+  --mi-border-strong: #CBD2CD;
+
+  /* --- Text Hierarchy (High Contrast & Scanability) --- */
+  --mi-text-primary: #151A17;
+  --mi-text-secondary: #58625C;
+  --mi-text-muted: #7C8780;
+  --mi-text-disabled: #AEB6B1;
+
+  /* --- Functional & Promo (10% share) --- */
+  --mi-promo: #D94C3D;
+  --mi-promo-bg: #FDF2F0;
+  --mi-warning: #B7791F;
+  --mi-warning-bg: #FFFBEB;
+  --mi-success: #167D5A;
+  --mi-success-bg: #EAF5F0;
+  --mi-info: #2B6CB0;
+  --mi-info-bg: #EBF8FF;
+
+  /* --- Typography Scale (Inter, 400/600/700) --- */
+  --mi-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --mi-font-page-title: 700 32px/38px var(--mi-font-family);
+  --mi-font-section-title: 700 22px/28px var(--mi-font-family);
+  --mi-font-card-title: 600 15px/21px var(--mi-font-family);
+  --mi-font-body: 400 14px/21px var(--mi-font-family);
+  --mi-font-secondary: 400 13px/18px var(--mi-font-family);
+  --mi-font-micro: 500 12px/16px var(--mi-font-family);
+
+  /* --- Spacing Scale --- */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+
+  /* --- Border Radius Scale --- */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+  --radius-pill: 9999px;
+
+  /* --- Shadows (Subtle, High Elevation only) --- */
+  --shadow-subtle: 0 1px 3px rgba(21, 26, 23, 0.04);
+  --shadow-hover: 0 4px 12px rgba(21, 26, 23, 0.07);
+  --shadow-modal: 0 20px 48px rgba(21, 26, 23, 0.16);
+
+  /* --- Backward-compatibility mapping --- */
+  --primary: var(--mi-primary);
+  --primary-hover: var(--mi-primary-dark);
+  --dark: var(--mi-primary-dark);
+  --canvas: var(--mi-background);
+  --surface: var(--mi-surface);
+  --surface-raised: var(--mi-surface);
+  --surface-hover: var(--mi-surface-secondary);
+  --ink: var(--mi-text-primary);
+  --ink-secondary: var(--mi-text-secondary);
+  --muted: var(--mi-text-muted);
+  --border: var(--mi-border);
+  --border-strong: var(--mi-border-strong);
+  --border-focus: var(--mi-primary);
+  --soft: var(--mi-primary-soft);
+  --promo: var(--mi-promo);
+}
+

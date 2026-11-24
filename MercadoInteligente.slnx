@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/backend/">
+    <Project Path="src/backend/MercadoInteligente.Api/MercadoInteligente.Api.csproj" />
+    <Project Path="src/backend/MercadoInteligente.Application/MercadoInteligente.Application.csproj" />
+    <Project Path="src/backend/MercadoInteligente.Domain/MercadoInteligente.Domain.csproj" />
+    <Project Path="src/backend/MercadoInteligente.Infrastructure/MercadoInteligente.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MercadoInteligente.Tests/MercadoInteligente.Tests.csproj" />
+  </Folder>
+</Solution>

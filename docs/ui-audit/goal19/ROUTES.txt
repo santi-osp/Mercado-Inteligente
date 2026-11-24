@@ -1,0 +1,10 @@
+/
+/buscar
+/mi-mercado
+/comparar
+/analisis
+/historial
+/tiendas
+/fuentes
+/ajustes
+/dev/ui-kit

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/banner.svg" alt="Mercado Inteligente RC1 Banner" width="100%">
+  <img src="docs/images/banner.svg" alt="Mercado Inteligente Banner" width="100%">
 </p>
 
 <p align="center">
@@ -7,9 +7,26 @@
   <img src="https://img.shields.io/badge/.NET%20Core-10.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET 10">
   <img src="https://img.shields.io/badge/Angular-20%20Standalone-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular 20">
   <img src="https://img.shields.io/badge/Database-SQLite%20Local-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite">
-  <img src="https://img.shields.io/badge/Retailers-D1%20%7C%20Éxito%20%7C%20Ara-F59E0B?style=for-the-badge" alt="Retailers">
-  <img src="https://img.shields.io/badge/Release-RC1%20Stable-10B981?style=for-the-badge" alt="RC1 Stable">
+  <img src="https://img.shields.io/badge/Retailers-D1%20%7C%20%C3%89xito%20%7C%20Ara-F59E0B?style=for-the-badge" alt="Retailers">
+  <img src="https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge" alt="License MIT">
 </p>
+
+<p align="center">
+  <img src="docs/images/divider.svg" width="100%">
+</p>
+
+## 📌 Tabla de Contenidos
+
+- [🛒 Visión General](#-visión-general)
+- [🎬 Recorrido Interactivo (Demo en Vivo)](#-recorrido-interactivo-demo-en-vivo)
+- [⚡ Capacidades Clave](#-capacidades-clave)
+- [📸 Galería de Interfaz (UI Showcase)](#-galería-de-interfaz-ui-showcase)
+- [🏛️ Arquitectura del Sistema](#️-arquitectura-del-sistema)
+- [🛠️ Pila Tecnológica](#️-pila-tecnológica)
+- [🚀 Inicio Rápido](#-inicio-rápido)
+- [📁 Estructura del Repositorio](#-estructura-del-repositorio)
+- [🔒 Privacidad y Almacenamiento Local](#-privacidad-y-almacenamiento-local)
+- [📄 Licencia y Créditos](#-licencia-y-créditos)
 
 <p align="center">
   <img src="docs/images/divider.svg" width="100%">
@@ -17,136 +34,235 @@
 
 ## 🛒 Visión General
 
-**Mercado Inteligente (RC1)** es una solución de escritorio y PWA **local-first** diseñada para el análisis, normalización, comparación y optimización de listas de compras en las principales cadenas de supermercados de Colombia (**Tiendas D1**, **Almacenes Éxito** y **Tiendas Ara**).
+**Mercado Inteligente** es una solución integral de escritorio y **PWA Local-First** concebida para el análisis, normalización comparativa y optimización matemática de listas de compras en las principales cadenas de retail de Colombia: **Tiendas D1**, **Almacenes Éxito** y **Tiendas Ara**.
 
-A diferencia de los servicios comerciales tradicionales basados en la nube, Mercado Inteligente opera con **privacidad absoluta**: todos los catálogos de productos, históricos de precios, listas de mercado y combinaciones optimizadas residen exclusivamente en la base de datos SQLite de tu máquina local. Los conectores externos hacia los supermercados se activan de forma controlada y opcional para refrescar tarifas cuando el usuario lo decide.
+### ¿Por qué Mercado Inteligente?
+- **Sin Dependencia de la Nube:** Todos tus catálogos, listas de mercado, notas personales y registros históricos residen exclusivamente en tu base de datos SQLite local.
+- **Transparencia en Precios:** Descubre el precio real por unidad de medida (precio por gramo o mililitro) para neutralizar trampas comerciales de presentación o empaque.
+- **Ahorro Heurístico Calculado:** El motor compara compras consolidadas en una sola tienda contra compras inteligentes multi-tienda, indicando con exactitud cuántos pesos colombianos ($ COP) ahorras en cada decisión.
 
 ---
 
-## 📸 Recorrido Visual (UI Showcase)
+## 🎬 Recorrido Interactivo (Demo en Vivo)
 
-### 1. Panel Principal & Comparativa Multi-Tienda
-Vista unificada de productos con cálculo automático de valor por unidad de medida (precio por gramo o mililitro) para comparativas directas y justas entre marcas.
+A continuación se muestra una animación del flujo de trabajo integral en Mercado Inteligente: desde el panel principal hasta el optimizador matemático de canasta y el asistente conversacional con inteligencia artificial:
 
-| Panel Principal (Desktop) | Comparador Multi-Tienda Directo |
+<p align="center">
+  <img src="docs/images/walkthrough.gif" alt="Mercado Inteligente Walkthrough" width="100%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.3);">
+</p>
+
+---
+
+## ⚡ Capacidades Clave
+
+| Módulo | Descripción Funcional |
+| :--- | :--- |
+| **⚖️ Motor de Normalización de Unidades** | Convierte automáticamente unidades arbitrarias (libras, kilos, gramos, onzas, litros, mililitros) a un valor base uniforme para comparaciones 1:1 justas. |
+| **🎯 Optimizador Heurístico de Canasta** | Calcula la bifurcación entre **Estrategia Monotienda** (la mejor tienda para comprarlo todo) y **Estrategia Multi-tienda** (la combinación óptima entre D1, Éxito y Ara). |
+| **🤖 Asistente de Compras con IA** | Búsqueda semántica inteligente y recomendaciones contextuales para sustitución de productos y recetas económicas. |
+| **📈 Trazabilidad Histórica de Tarifas** | Registro cronológico local de variaciones de precio por producto para auditar descuentos y detectar falsas rebajas. |
+| **🔄 Conectores On-Demand Desacoplados** | Sincronización controlada y bajo demanda contra catálogos externos sin exponer datos ni credenciales del usuario. |
+| **📱 Experiencia Responsive & PWA** | Adaptable a pantallas ultra-anchas de escritorio, portátiles y smartphones con soporte para instalación offline. |
+
+---
+
+## 📸 Galería de Interfaz (UI Showcase)
+
+### 1. Panel de Control y Comparativa Multi-Tienda Directa
+Vista consolidada de productos con cálculo instantáneo de valor unitario por gramo o mililitro.
+
+| Panel Principal (Desktop) | Comparador Multi-Tienda (D1 · Éxito · Ara) |
 | :---: | :---: |
-| <img src="docs/images/screenshots/home-desktop.png" alt="Home Dashboard" width="500"> | <img src="docs/images/screenshots/compare-stores.png" alt="Comparador Tiendas" width="500"> |
+| <img src="docs/images/screenshots/home-desktop.png" alt="Home Dashboard" width="520"> | <img src="docs/images/screenshots/compare-stores.png" alt="Comparador de Tiendas" width="520"> |
 
 <br>
 
-### 2. Optimizador Inteligente de Canasta y Análisis Histórico
-El algoritmo analiza tu lista de mercado y calcula la estrategia de compra más económica: compra centralizada en una sola tienda vs. compra dividida óptima con desglose de ahorro en pesos colombianos ($ COP).
+### 2. Algoritmo Optimizador y Analítica Histórica
+Desglose detallado del ahorro máximo en canasta familiar y gráficas interactivas de evolución de precios.
 
-| Optimizador de Compras y Canasta | Histórico de Precios e Inflación |
+| Optimizador Matemático de Canasta | Historial de Precios e Inflación |
 | :---: | :---: |
-| <img src="docs/images/screenshots/cart-optimizer.png" alt="Optimizador de Canasta" width="500"> | <img src="docs/images/screenshots/price-history.png" alt="Historial de Precios" width="500"> |
+| <img src="docs/images/screenshots/cart-optimizer.png" alt="Optimizador de Canasta" width="520"> | <img src="docs/images/screenshots/price-history.png" alt="Histórico de Precios" width="520"> |
 
 <br>
 
-### 3. Experiencia Móvil / PWA Responsive
-Diseño totalmente adaptable a pantallas táctiles de smartphone con modo oscuro y atajos rápidos de escaneo y consulta.
+### 3. Asistente Conversacional & Sincronización de Tiendas
+Interacción guiada por inteligencia artificial para recetas y compras, junto con diagnóstico de estado de conectores.
+
+| Asistente IA de Compras | Monitor y Salud de Conectores |
+| :---: | :---: |
+| <img src="docs/images/screenshots/ai-assistant.png" alt="Asistente IA" width="520"> | <img src="docs/images/screenshots/store-sync.png" alt="Sincronización de Tiendas" width="520"> |
+
+<br>
+
+### 4. Experiencia Móvil PWA
+Diseño táctil ergonómico optimizado para compras directas en el pasillo del supermercado.
 
 <p align="center">
-  <img src="docs/images/screenshots/home-mobile.png" alt="Mobile Experience" width="340">
+  <img src="docs/images/screenshots/home-mobile.png" alt="Experiencia Móvil PWA" width="340">
 </p>
-
-<p align="center">
-  <img src="docs/images/divider.svg" width="100%">
-</p>
-
-## ⚡ Capacidades Principales
-
-- **📊 Normalizador de Unidades:** Convierte automáticamente presentaciones dispersas (libras, kilos, onzas, litros, mililitros) a un valor unitario estándar para evitar trampas de empaque.
-- **🎯 Algoritmo de Compra Óptima:**
-  - *Opción Monotienda:* La tienda más barata para comprar toda tu lista en un solo viaje.
-  - *Opción Multi-tienda:* La combinación matemática perfecta entre D1, Éxito y Ara para maximizar tu ahorro.
-- **🔒 Privacidad Local-First:** No requiere cuentas externas, ni almacenamiento en nubes públicas, ni rastreadores de publicidad.
-- **📈 Historial de Precios y Tendencias:** Registro cronológico de cambios de precio para identificar promociones reales vs falsos descuentos.
-- **⚡ Proceso Unificado:** Script en PowerShell que compila y orquesta el backend ASP.NET Core y el cliente Angular en un solo clic.
 
 ---
 
 ## 🏛️ Arquitectura del Sistema
 
+La solución adopta los principios de **Clean Architecture** con separación de responsabilidades y total soberanía de datos del usuario:
+
+<p align="center">
+  <img src="docs/images/architecture.svg" alt="Arquitectura del Sistema" width="100%">
+</p>
+
 ```mermaid
-graph TD
-    Client[Angular 20 Standalone PWA] -->|HTTP / Localhost| API[ASP.NET Core 10 Web API]
-    API --> NormEngine[Motor de Normalización de Unidades]
-    API --> OptEngine[Optimizador de Canasta Heurístico]
-    API --> SyncEngine[Conectores de Sincronización Opcionales]
-    
-    SyncEngine -.->|Lectura Externa| D1[Catálogo D1]
-    SyncEngine -.->|Lectura Externa| Exito[Catálogo Éxito]
-    SyncEngine -.->|Lectura Externa| Ara[Catálogo Ara]
-    
-    API --> LocalDB[(SQLite Local Storage)]
+flowchart TD
+    subgraph Cliente["Cliente PWA (Angular 20)"]
+        UI["UI Standalone & Signals"]
+        Cache["Service Worker & Local Storage"]
+    end
+
+    subgraph Backend["Backend (.NET 10 Web API)"]
+        API["Controllers & Endpoints"]
+        Norm["Motor de Normalización"]
+        Opt["Optimizador de Canasta"]
+        Sync["Servicio de Sincronización"]
+    end
+
+    subgraph Datos["Persistencia Local"]
+        DB[("SQLite Local (WAL Mode)")]
+    end
+
+    subgraph Fuentes["Retailers Externos (Opcional)"]
+        D1["Catálogo Tiendas D1"]
+        Exito["Catálogo Almacenes Éxito"]
+        Ara["Catálogo Tiendas Ara"]
+    end
+
+    UI -->|HTTP / Localhost| API
+    API --> Norm
+    API --> Opt
+    API --> Sync
+    API --> DB
+    Sync -.->|Lectura Controlada| D1
+    Sync -.->|Lectura Controlada| Exito
+    Sync -.->|Lectura Controlada| Ara
 ```
 
 ---
 
-## 🚀 Inicio Rápido en Un Solo Paso
+## 🛠️ Pila Tecnológica
 
-Para iniciar la aplicación completa (backend compilado y frontend Angular sirviendo en `http://localhost:5000`):
+### Backend (.NET Core 10)
+- **Framework:** ASP.NET Core 10 Web API
+- **Arquitectura:** Clean Architecture (Domain, Application, Infrastructure, Api)
+- **ORM & Persistencia:** Entity Framework Core 10 con SQLite (WAL journal mode)
+- **Patrones:** CQRS, Repository Pattern, Dependency Injection nativo
+
+### Frontend (Angular 20)
+- **Framework:** Angular 20 (Standalone Components, Signals reactivos)
+- **Estilos & UI:** TailwindCSS, DaisyUI y tokens de diseño personalizados
+- **Capacidades PWA:** Web App Manifest, Service Workers, soporte Offline First
+
+### Scripts & Automatización
+- **PowerShell 7 / 5.1:** Scripts de compilación unificada, orquestación y testing automatizado
+
+---
+
+## 🚀 Inicio Rápido
+
+### Prerrequisitos
+- **Sistema Operativo:** Windows 10/11 (x64), Linux o macOS
+- **.NET SDK:** 10.0 o superior
+- **Node.js:** 20.x, 22.x o 24.x LTS
+- **PowerShell:** 5.1+ o PowerShell Core 7+
+
+### 1. Clonar el Repositorio
+```bash
+git clone https://github.com/santi-osp/Mercado-Inteligente.git
+cd Mercado-Inteligente
+```
+
+### 2. Ejecutar la Aplicación Completa
+Para arrancar el backend compilado y el cliente Angular en un solo comando:
 
 ```powershell
 .\scripts\run-app.ps1
 ```
 
-*Si el frontend aún no ha sido compilado, el script detectará las dependencias y lo compilará automáticamente antes de arrancar.*
+La interfaz quedará accesible de inmediato en:
+👉 **`http://localhost:5000`**
 
-### Modo Desarrollo (Hot-Reload)
-Para desarrolladores que deseen modificar el frontend en caliente con proxy automático:
+### 3. Modo Desarrollo (Hot-Reload)
+Si deseas modificar el frontend y backend en caliente con proxy automático:
+
 ```powershell
 .\scripts\run-app.ps1 -Dev
 ```
 - **Backend API:** `http://127.0.0.1:5000`
 - **Angular Dev Server:** `http://localhost:4200`
 
----
-
-## 📋 Requisitos del Entorno
-
-- **Sistema Operativo:** Windows 10 o Windows 11 (x64)
-- **.NET SDK:** Versión 10.0 o superior
-- **Node.js:** Versión 20.x, 22.x o 24.x LTS
-- **PowerShell:** 5.1 o PowerShell 7+
+### 4. Ejecutar Pruebas Automatizadas
+```powershell
+.\scripts\test.ps1
+```
 
 ---
 
 ## 📁 Estructura del Repositorio
 
 ```text
-Mercado_Inteligente/
-├── artifacts/                   # Binarios y builds compilados listos para empaque
-├── assets/                      # Iconografía PWA, logotipos y prototipos
-├── docs/
-│   ├── images/
-│   │   ├── banner.svg           # Hero banner vectorial
-│   │   ├── divider.svg          # Separador decorativo
-│   │   └── screenshots/         # Capturas oficiales de auditoría de interfaz
-│   ├── development/             # Reportes de avance y trazabilidad
-│   └── ui-audit/                # Evidencia fotográfica de auditorías visuales
-├── scripts/
-│   ├── build.ps1                # Compilación integral de la solución
-│   ├── run-app.ps1              # Lanzador rápido producción / dev
-│   └── test.ps1                 # Ejecución de suites de prueba unitarias
+Mercado-Inteligente/
+├── assets/                    # Iconografía, logotipos PWA e ilustraciones
+├── docs/                      # Documentación técnica completa
+│   ├── architecture/          # Decisiones y diagramas de arquitectura
+│   ├── images/                # Banners vectoriales, GIFs y capturas oficiales
+│   │   ├── banner.svg         # Hero banner SVG
+│   │   ├── architecture.svg   # Diagrama de arquitectura SVG
+│   │   ├── divider.svg        # Separador decorativo SVG
+│   │   ├── walkthrough.gif    # Demo animada del flujo de trabajo
+│   │   └── screenshots/       # Capturas oficiales de alta resolución
+│   ├── decisions/             # Architecture Decision Records (ADRs)
+│   ├── providers/             # Especificaciones de conectores D1, Éxito y Ara
+│   └── ui-audit/              # Auditoría visual completa
+├── goals/                     # Roadmap y especificaciones de metas técnicas
+├── scripts/                   # Scripts PowerShell de compilación, ejecución y test
+│   ├── build.ps1              # Compilación completa backend y frontend
+│   ├── run-app.ps1            # Lanzador unificado para desarrollo y producción
+│   └── test.ps1               # Ejecutor de suites de pruebas unitarias
 ├── src/
-│   ├── backend/                 # ASP.NET Core Web API (.NET 10)
-│   └── frontend/                # Angular 20 Standalone Components & PWA
-├── tests/                       # Pruebas automatizadas de integración y unidad
-└── README.md
+│   ├── backend/               # Solución ASP.NET Core 10 Web API
+│   │   ├── MercadoInteligente.Api
+│   │   ├── MercadoInteligente.Application
+│   │   ├── MercadoInteligente.Domain
+│   │   └── MercadoInteligente.Infrastructure
+│   └── frontend/              # Aplicación Angular 20 Standalone PWA
+├── tests/                     # Pruebas automatizadas xUnit (.NET 10)
+├── LICENSE                    # Licencia MIT de código abierto
+└── README.md                  # Documentación principal
 ```
 
 ---
 
-## 👨‍💻 Autor y Contacto
+## 🔒 Privacidad y Almacenamiento Local
 
-Desarrollado por **Santiago Ospina Arango**  
-- **GitHub:** [@santi-osp](https://github.com/santi-osp)  
-- **Especialidad:** Soluciones Local-First · .NET Core / Angular · Automatización de Datos
+Mercado Inteligente fue diseñado bajo la premisa de **Privacidad por Diseño**:
+- Ningún dato de compras, listas, presupuestos o preferencias personales se envía a servidores de analítica.
+- Toda la base de datos se almacena en un archivo local `*.db` en la máquina del usuario.
+- Los scrapers y conectores de consulta operan únicamente bajo petición expresa del usuario para actualizar tarifas.
 
 ---
 
+## 📄 Licencia y Créditos
+
+Este proyecto está bajo la **Licencia MIT**. Consulta el archivo [LICENSE](file:///C:/Users/santi/Documents/0%20REPOSITORIOS/Mercado_Inteligente/LICENSE) para obtener más detalles.
+
+### Autor y Mantenedor
+**Santiago Ospina Arango**  
+- **GitHub:** [@santi-osp](https://github.com/santi-osp)  
+- **Enfoque:** Arquitectura de Software · Soluciones Local-First · .NET Core / Angular · Automatización
+
 <p align="center">
-  <sub>Mercado Inteligente © 2026 · Release Candidate 1 · Construido para la comunidad</sub>
+  <img src="docs/images/divider.svg" width="100%">
+</p>
+
+<p align="center">
+  <sub>Mercado Inteligente © 2026 · Desarrollado con dedicación para el ahorro inteligente de las familias</sub>
 </p>

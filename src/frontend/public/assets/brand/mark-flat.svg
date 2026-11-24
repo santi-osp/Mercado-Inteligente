@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="t">
+  <title id="t">Mercado Inteligente</title>
+  <path d="M25 18h56c6 0 10 2 14 6l18 18c4 4 6 8 6 14v45c0 8-6 14-14 14H25c-8 0-14-6-14-14V32c0-8 6-14 14-14Z" fill="#167D5A"/>
+  <circle cx="94" cy="35" r="7" fill="#EAF5F0"/>
+  <path d="M31 87V47h12l21 22 21-22h12v40H84V66L64 86 44 66v21H31Z" fill="#fff"/>
+  <path d="M69 89c4-17 14-27 31-29-3 17-13 27-31 29Z" fill="#73C66B"/>
+</svg>
